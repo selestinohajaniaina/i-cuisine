@@ -1,0 +1,29 @@
+<ion-header id="header">
+  <ion-toolbar ng-controller="MyCtrl">
+    <ion-title id="title">Accueil</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menuId="menu-main" class="menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="contener">
+
+    <div class="group" routerLink="../categorie">
+      <div><img src="assets/cat.jpg"></div>
+      <div class="label">Categorie</div>
+    </div>
+
+    <div class="group" routerLink="../produit">
+      <div><img src="assets/pro.jpg"></div>
+      <div class="label">Produit</div>
+    </div>
+
+    <div class="group" routerLink="../recette">
+      <div><img src="assets/pla.jpg"></div>
+      <div class="label">Recette</div>
+    </div>
+
+  </div>
+</ion-content>

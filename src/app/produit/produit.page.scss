@@ -21,7 +21,7 @@
     }
 }
 
-.content{
+.contener{
     background: #fff;
     width: 100%;
     height: 100%;
@@ -34,14 +34,18 @@
         width: 100%;
         display: flex;
         justify-content: center;
-        font-size: 15pt;
+        font-size: 12pt;
+        font-weight: bold;
         margin-bottom: 20px;
 
-        input{
-            width: 70%;
+        input , select{
             color: #1e1e1e;
             background: #fff;
             height: 40px;
+        }
+        
+        input{
+            width: 70%;
         }
 
         button{
@@ -49,7 +53,7 @@
             background: #428cff;
         }
     }
-    
+
     .err{
         color: rgb(255, 66, 66);
         font-size: 7pt;

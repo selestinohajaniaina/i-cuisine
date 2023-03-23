@@ -1,0 +1,20 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.menu-header-bg{
+    position: absolute;
+    height: 180px;
+    width: 350px;
+    background: #ef4444;
+    box-shadow: 0 1px 10px #ef4444ad;
+    transform: rotate(-15deg);
+    border-radius: 10px 10px 10px 50px;
+    margin: -50px 0 60px -15px;
+    z-index: 10;
+}
+
+.contener{
+    background: #fff;
+    height: 100%;
+}

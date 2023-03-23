@@ -30,49 +30,56 @@
     align-items: center;
     padding-top: 20px;
 
+    .p{
+        color: #1e1e1e;
+        margin: 8px 0;
+    }
+
     .form{
         width: 100%;
         display: flex;
         justify-content: center;
         font-size: 15pt;
         margin-bottom: 20px;
-
+        
         input{
             width: 70%;
             color: #1e1e1e;
             background: #fff;
             height: 40px;
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
         }
 
         button{
             width: 20%;
             background: #428cff;
+            box-shadow: 0 20px 25px -5px rgb(0, 0, 255,0.1), 0 8px 10px -6px rgb(0, 0, 255,0.1);
         }
     }
-    
+
     .err{
         color: rgb(255, 66, 66);
         font-size: 7pt;
     }
 
-    table{
+    .listeRecContent{
         color: #1e1e1e;
-        width: 100%;
-        font-weight:700;
         text-align: center;
-
-        #head{
-            background: #1770ffec;
-            color: #fff;
-            height: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        
+        .listeRec{
+            border: 1px solid #3f3f3f;
+            font-weight: bold;
+            width: 100%;
+            padding: 8px 50px;
+            border-radius: 50px;
+            margin: 3px 0;
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
         }
-
-        tr{
-            height: 30px;
-
-            .material-icons{
-                color: #505050;
-            }
+        .listeRec:active{
+            transform: scale(1.05);
         }
     }
 }

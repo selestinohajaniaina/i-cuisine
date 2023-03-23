@@ -11,8 +11,11 @@
       <div class="form">
         <input type="text" [(ngModel)]="categorieCode" placeholder="code">
         <input type="text" [(ngModel)]="categorieName" placeholder="Libelle">
-      <button (click)="btnAjout()">add</button>
-      </div>
+      <button (click)="btnAjout()">
+        <span class="material-icons">control_point</span>
+      </button>
+    </div>
+    <span *ngIf="err" class="err">{{ err }}</span>
     <table border="1">
       <tr id="head">
         <td>code</td>

@@ -9,6 +9,8 @@ import { ICategorie } from './categorie';
 })
 export class CategoriePage implements OnInit {
 
+  public err:string = '';
+
   public liste:ICategorie[]=[];
 
   public categorieName:string = '';
@@ -66,6 +68,8 @@ export class CategoriePage implements OnInit {
       this.categorieCode='';
       this.getCategorie();
       this.getCategorie();
+    }else{
+      this.err="Champs vide non valide.";
     }
   }
 
