@@ -1,0 +1,62 @@
+#header {
+    color: rgb(241 245 249);
+    background-color: rgb(239 68 68);
+    display: flex;
+    align-items: center;
+    height: 4rem;
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    
+     #back{
+        color: #fff;
+    }
+    
+    #title {
+        color: rgb(241 245 249);
+        background-color: rgb(239 68 68);
+        height: 100%;
+        font-size: 20pt;
+        line-height: 1.75rem;
+    }
+}
+
+#form {
+    background: #fff;
+    height: 100%;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    input {
+        background: transparent;
+        margin-top: 8px;
+        width: 90%;
+        height: 40px;
+        border-radius: 50px;
+        color: black;
+    }
+
+    .login{
+        width: 90%;
+    }
+
+    #caractere{
+        color: black;
+        width: 90%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        input {
+            width: 20px;
+            margin: 0;
+            background: transparent;
+        }
+    }
+
+    .err{
+        color: rgb(255, 66, 66);
+        font-size: 7pt;
+    }
+}

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
+import { Browser } from '@capacitor/browser';
 import { Capacitor } from '@capacitor/core';
 Capacitor.convertFileSrc("facebook.com");
 
@@ -8,15 +9,9 @@ Capacitor.convertFileSrc("facebook.com");
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage  {
 
-  constructor(private iab:InAppBrowser) {
-const browser = this.iab.create('https://ionicframework.com/');
-browser.on('loadstop').subscribe(event => {
-   browser.insertCSS({ code: "body{color: red;" });
-});
+  constructor() {
 
-browser.show();
   }
-
 }

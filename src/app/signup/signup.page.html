@@ -1,0 +1,23 @@
+
+<ion-header id="header">
+  <ion-back-button id="back"></ion-back-button>
+  <ion-toolbar>
+    <ion-title id="title">Sign up</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form id="form" [formGroup]="userForm">
+    <input type="text" placeholder="Utilisateur" formControlName="username">
+    <input type="email" placeholder="Email" formControlName="email">
+    <input [type]="type" placeholder="mots de passe" formControlName="password">
+    <input [type]="type" placeholder="confirme" formControlName="confirm">
+    <div id="caractere">
+      <input type="checkbox" (click)="checked()" name="car" id="car" >&nbsp;
+      <label for="car">Afficher les caracteres</label>
+    </div>
+    <ion-button expand="block" class="login" shape="round" (click)="submit()">Login</ion-button>
+    <span *ngIf="error" class="err">{{ error }}</span>
+  </form>
+</ion-content>
+ 

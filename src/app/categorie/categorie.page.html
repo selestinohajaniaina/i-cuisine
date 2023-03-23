@@ -1,0 +1,31 @@
+<ion-header id="header">
+  <ion-back-button id="back"></ion-back-button>
+  <ion-toolbar ng-controller="MyCtrl">
+    <ion-title id="title">Categorie</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="content">
+      <div class="form">
+        <input type="text" [(ngModel)]="categorieCode" placeholder="code">
+        <input type="text" [(ngModel)]="categorieName" placeholder="Libelle">
+      <button (click)="btnAjout()">add</button>
+      </div>
+    <table border="1">
+      <tr id="head">
+        <td>code</td>
+        <td>Libelle</td>
+      </tr>
+        <tr *ngFor="let listeLength of liste">
+          <td>{{ listeLength.cat_code }}</td>
+          <td>{{ listeLength.libelleCa }}</td>
+          <td (click)="btnSup(listeLength.cat_id)">
+            <span class="material-icons">delete</span>
+          </td>
+        </tr>
+    </table>
+  </div>
+  
+</ion-content>
