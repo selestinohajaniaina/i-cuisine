@@ -22,7 +22,7 @@
     <div class="p">Ou choisir dans cette liste:</div>
     
       <div class="listeRecContent">
-        <div *ngFor="let listeRecetteLength of liste" class="listeRec">
+        <div *ngFor="let listeRecetteLength of liste" class="listeRec" routerLink="../personne/{{listeRecetteLength.id_plat}}">
           <!-- <td>{{ listeRecetteLength.id_plat }}</td> -->
           {{ listeRecetteLength.nom_plat }}
           <!-- <td (click)="btnSup(listeLength.cat_id)">

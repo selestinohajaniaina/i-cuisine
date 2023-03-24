@@ -35,6 +35,14 @@ const routes: Routes = [
     path: 'recette',
     loadChildren: () => import('./recette/recette.module').then( m => m.RecettePageModule)
   },
+  {
+    path: 'personne',
+    loadChildren: () => import('./personne/personne.module').then( m => m.PersonnePageModule)
+  },
+  {
+    path: 'personne/:id_plat',
+    loadChildren: () => import('./personne/personne.module').then( m => m.PersonnePageModule)
+  },
 ];
 
 @NgModule({
