@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -8,11 +10,13 @@ import { FormControl, FormGroup } from '@angular/forms'
 })
 export class SignupPage implements OnInit {
 
+  private url = 'http://localhost:3000';
+
   public data:object = {};
 
   public error='';
 
-  constructor() { }
+  constructor(private http: HttpClient, private router:Router) { }
 
   public showPassword:boolean=true;
   public type:string= 'password';
@@ -35,6 +39,7 @@ export class SignupPage implements OnInit {
         this.error ='';
         this.data = this.userForm.value;
         console.log(this.data);
+        this.signupToDB(this.data);
 
       }else{
         this.data = {}
@@ -53,6 +58,15 @@ export class SignupPage implements OnInit {
   checked(){
     this.showPassword =! this.showPassword;
     this.type = this.showPassword ? 'password': 'text';
+  }
+
+  //add new user
+  signupToDB(bodyData:{}){
+    this.http.post(`${this.url}/person/add/`,bodyData).subscribe((resultData: any)=>
+      {
+          console.log(resultData,"signup Successfully");
+          this.router.navigate(['../accueil']);
+      });
   }
 
 }

@@ -36,12 +36,16 @@ const routes: Routes = [
     loadChildren: () => import('./recette/recette.module').then( m => m.RecettePageModule)
   },
   {
-    path: 'personne',
+    path: 'personne/:id_plat',
     loadChildren: () => import('./personne/personne.module').then( m => m.PersonnePageModule)
   },
   {
-    path: 'personne/:id_plat',
-    loadChildren: () => import('./personne/personne.module').then( m => m.PersonnePageModule)
+    path: 'detail/:id_recette',
+    loadChildren: () => import('./detail/detail.module').then( m => m.DetailPageModule)
+  },
+  {
+    path: 'resultat',
+    loadChildren: () => import('./resultat/resultat.module').then( m => m.ResultatPageModule)
   },
 ];
 

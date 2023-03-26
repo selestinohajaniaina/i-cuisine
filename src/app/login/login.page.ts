@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,8 +10,9 @@ import { FormControl, FormGroup } from '@angular/forms'
 })
 export class LoginPage implements OnInit {
 
-  constructor() { }
+  constructor(private http: HttpClient, private router: Router) { }
 
+  private url = 'http://localhost:3000';
   public showPassword:boolean=true;
   public type:string= 'password';
   
@@ -24,10 +27,8 @@ export class LoginPage implements OnInit {
   connexion(){
     if(this.userForm.value.email!=''&&this.userForm.value.password!=''){
       this.data = this.userForm.value;
+      this.login(this.userForm.value.email);
       this.error = '';
-
-      //si vrai les infos
-      console.log(this.data);
 
     }else{
 
@@ -44,5 +45,25 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
   }
+
+  login(email:any){
+    //selection de l'user dans la liste for login
+      this.http.get(`${this.url}/user/${email}`)
+      .subscribe((resultData: any)=>
+      {
+        if(resultData.status==true&&resultData.data.length>0){
+          if(resultData.data[0].password == this.userForm.value.password){
+            console.log(resultData.data[0]);
+            this.data = resultData.data[0];
+            this.router.navigate(['../accueil']);
+          }else{
+            this.error = 'mots de passe incorrect, veillez ressayer!';
+          }
+        }else{
+          this.error = 'compte introuvable';
+        }
+      });
+    }
+
 
 }

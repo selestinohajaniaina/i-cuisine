@@ -9,6 +9,7 @@ import { IRecette } from './recette';
 })
 export class RecettePage implements OnInit {
 
+  private url = 'http://localhost:3000';
   public liste:IRecette[]=[];
 
   public nom_plat:string = '';
@@ -22,7 +23,7 @@ export class RecettePage implements OnInit {
 
   //selection
   getRecette(){
-    this.http.get("http://localhost:3000/select/plat/")
+    this.http.get(`${this.url}/select/plat/`)
     .subscribe((resultData: any)=>
     {
       this.liste = resultData.result;
@@ -32,7 +33,7 @@ export class RecettePage implements OnInit {
   }
   //ajout
   addRecette(bodyData:{}){
-    this.http.post("http://localhost:3000/insert/recette",bodyData).subscribe((resultData: any)=>
+    this.http.post(`${this.url}/insert/recette`,bodyData).subscribe((resultData: any)=>
     {
         console.log(resultData,"categorie Successfully");
     });

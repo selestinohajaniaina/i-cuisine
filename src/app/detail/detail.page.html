@@ -1,0 +1,43 @@
+<ion-header id="header">
+  <ion-back-button id="back"></ion-back-button>
+  <ion-toolbar ng-controller="MyCtrl">
+    <ion-title id="title">{{nom_recette}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="contener">
+
+    <div class="form">
+      <select [(ngModel)]="produit" >
+        <option *ngFor="let listeProLength of listePro" [value]="listeProLength.libellePro+'='+listeProLength.unite">{{ listeProLength.libellePro }}</option>
+      </select>
+      <input type="text" placeholder="variete" [(ngModel)]="varProduit" class="var">
+      <input type="number" placeholder="L ou kg ou pcs" [(ngModel)]="qteProduit">
+    </div>
+    <div class="button">
+      <ion-button (click)="btnAjout()" expand="block">
+        <span class="material-icons">control_point</span>&nbsp;
+        Ajouter
+      </ion-button>
+    </div>
+
+    <span *ngIf="err" class="err">{{ err }}</span>
+
+    <table border="1">
+      <tr id="head">
+        <td>Libelle</td>
+        <td>Variete</td>
+        <td>Qte</td>
+      </tr>
+        <tr *ngFor="let listeLength of liste">
+          <td>{{ listeLength.libellePro.split('=')[0] }}</td>
+          <td>{{ listeLength.variete }}</td>
+          <td>{{ (listeLength.qte*nbrPerson) + ' ' + listeLength.libellePro.split('=')[1] }}</td>
+          <td (click)="btnSup(listeLength.id)">
+            <span class="material-icons">delete</span>
+          </td>
+        </tr>
+    </table>
+  </div>
+</ion-content>
