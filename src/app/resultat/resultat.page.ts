@@ -9,7 +9,7 @@ import { IDetailRecette } from './resultat';
 })
 export class ResultatPage implements OnInit {
 
-  private url = 'http://localhost:3000';
+  private url = 'https://i-c-server.onrender.com'; //'http://localhost:3000'
 
   public liste:IDetailRecette[] = [];
 

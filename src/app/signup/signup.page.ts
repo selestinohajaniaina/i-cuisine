@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class SignupPage implements OnInit {
 
-  private url = 'http://localhost:3000';
+  private url = 'https://i-c-server.onrender.com'; //'http://localhost:3000'
 
   public data:object = {};
 

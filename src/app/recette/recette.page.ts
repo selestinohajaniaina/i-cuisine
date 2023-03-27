@@ -9,7 +9,7 @@ import { IRecette } from './recette';
 })
 export class RecettePage implements OnInit {
 
-  private url = 'http://localhost:3000';
+  private url = 'https://i-c-server.onrender.com'; //'http://localhost:3000'
   public liste:IRecette[]=[];
 
   public nom_plat:string = '';

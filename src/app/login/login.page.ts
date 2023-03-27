@@ -12,7 +12,7 @@ export class LoginPage implements OnInit {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  private url = 'http://localhost:3000';
+  private url = 'https://i-c-server.onrender.com'; //'http://localhost:3000'
   public showPassword:boolean=true;
   public type:string= 'password';
   

@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PersonnePage implements OnInit {
 
-  private url = 'http://localhost:3000';
+  private url = 'https://i-c-server.onrender.com'; //'http://localhost:3000'
 
   constructor(private route: ActivatedRoute, private http: HttpClient) { }
 

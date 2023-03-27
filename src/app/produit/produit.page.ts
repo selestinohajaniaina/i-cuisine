@@ -12,7 +12,7 @@ import { IProduit } from './produit';
 export class ProduitPage implements OnInit {
 
   public err:string = '';
-  private url = 'http://localhost:3000';
+  private url = 'https://i-c-server.onrender.com'; //'http://localhost:3000'
   public libellePro:string = '';
   public unite:string = '';
   public codeCa:string = '';

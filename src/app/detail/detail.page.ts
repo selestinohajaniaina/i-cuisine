@@ -12,7 +12,7 @@ import { IDetail } from './detail';
 })
 export class DetailPage implements OnInit {
 
-  private url = 'http://localhost:3000';
+  private url = 'https://i-c-server.onrender.com'; //'http://localhost:3000'
   public nbrPerson:number = 0;
   public qteProduit:number = 0;
   public id_recette:number = 0;
