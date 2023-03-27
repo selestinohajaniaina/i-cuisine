@@ -44,6 +44,9 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
+    if(localStorage.getItem('id_user')){
+      this.router.navigate(['../accueil']);
+    }
   }
 
   login(email:any){
@@ -55,6 +58,7 @@ export class LoginPage implements OnInit {
           if(resultData.data[0].password == this.userForm.value.password){
             console.log(resultData.data[0]);
             this.data = resultData.data[0];
+            localStorage.setItem('id_user',resultData.data[0].id_user);
             this.router.navigate(['../accueil']);
           }else{
             this.error = 'mots de passe incorrect, veillez ressayer!';

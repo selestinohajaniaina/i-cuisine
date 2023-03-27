@@ -82,6 +82,35 @@
         align-items: center;
         padding: 3px;
 
+        .sous-menu{
+            background: #a8a8a89f;
+            box-shadow: 0 1px 10px #313131ad;
+            border: 1px solid #a8a8a8;
+            position: absolute;
+            top: -170%;
+            right: 0;
+            border-radius: 8px;
+            
+            div{
+                border-bottom: #3f3f3f solid 1px;
+                margin-top: 8px;
+                margin: 2px;
+                padding: 0 8px 8px 8px;
+                
+                ion-icon{
+                    color: #3f3f3f;
+                }
+            }
+
+            div:active{
+                background: #a8a8a8ec;
+            }
+
+            .div2 ion-icon{
+                transform: rotateZ(45deg) scale(1.5);
+            }
+        }
+
         .item{
             font-size: 13pt;
             color: #fff;
