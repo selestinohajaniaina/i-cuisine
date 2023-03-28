@@ -15,7 +15,7 @@
         <td>Rating</td>
       </tr>
         <tr *ngFor="let listeLength of liste"> 
-          <td>{{ listeLength.id_plat }}</td>
+          <td>{{ listeLength.nom_plat }}</td>
           <td>{{ listeLength.temps }}</td>
           <td>{{ (listeLength.dificulte) }}</td>
           <td>{{ (listeLength.etoile=="1"?"⭐":listeLength.etoile=="2"?"⭐⭐":listeLength.etoile=="3"?"⭐⭐⭐":listeLength.etoile=="4"?"⭐⭐⭐⭐":"⭐⭐⭐⭐⭐") }}</td>

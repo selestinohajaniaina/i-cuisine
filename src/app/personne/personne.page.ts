@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-personne',
@@ -11,11 +12,12 @@ export class PersonnePage implements OnInit {
 
   private url = 'https://i-c-server.onrender.com'; //'http://localhost:3000'
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient, private loadingCtrl: LoadingController) { }
 
   public nbrPerson:number =0;
   public id_recette:number=0;
   public rating :number =0;
+  public nom_plat:string = '';
   public minute:number = 0;
   public dificulte = '';
   public error = '';
@@ -24,17 +26,29 @@ export class PersonnePage implements OnInit {
     id_plat:number,
     min:number,
     dificulte:string,
-    rating:number
+    rating:number,
+    nom_plat:string
   }={
     id_plat:this.id_recette,
     min:0,
     dificulte:"",
-    rating:0
+    rating:0,
+    nom_plat:""
   };
 
   ngOnInit() {
     this.id_recette = this.route.snapshot.params['id_plat'];
-    console.log(this.id_recette);
+    this.getPlat();
+  }
+
+  //get plat where id=id_recette
+  getPlat(){
+    this.http.get(`${this.url}/select/plat/${this.id_recette}`)
+    .subscribe((resultData: any)=>
+    {
+      this.nom_plat = resultData.result[0].nom_plat;
+      console.log(this.nom_plat);
+    });
   }
 
   btnSend(){
@@ -43,13 +57,14 @@ export class PersonnePage implements OnInit {
         id_plat:this.id_recette,
         min: this.minute,
         dificulte:this.dificulte,
-        rating:this.rating
+        rating:this.rating,
+        nom_plat:this.nom_plat
       }
+      this.showLoading();
       this.sendFeedback(this.data);
       this.rating  =0;
       this.minute= 0;
       this.dificulte = '';
-      this.msg = 'Merci de votre note!';
     }else{
       this.error = 'Champs vide non valide!';
     }
@@ -61,6 +76,15 @@ export class PersonnePage implements OnInit {
       {
           console.log(resultData,"signup Successfully");
       });
+  }
+
+  async showLoading(){
+    const loading = await this.loadingCtrl.create({
+      message:'en cours d\'envoie',
+      duration:3000
+    });
+    loading.present();
+    this.msg = 'Merci de votre note!';
   }
 
 }

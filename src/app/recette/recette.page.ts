@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { LoadingController } from '@ionic/angular';
 import { IRecette } from './recette';
 
 @Component({
@@ -15,9 +16,10 @@ export class RecettePage implements OnInit {
   public nom_plat:string = '';
   public err:string = '';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
+    this.showLoading();
     this.getRecette();
   }
 
@@ -53,6 +55,14 @@ export class RecettePage implements OnInit {
     }else{
       this.err="Champs vide non valide.";
     }
+  }
+
+  async showLoading(){
+    const loading = await this.loadingCtrl.create({
+      message:'Chargement...',
+      duration:1500
+    });
+    loading.present();
   }
 
 }

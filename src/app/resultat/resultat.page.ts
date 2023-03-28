@@ -23,11 +23,11 @@ export class ResultatPage implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.getProduit();
+    this.getAllRecette();
   }
   
   //selection de tout les plat (recette) enregistré
-  getProduit(){
+  getAllRecette(){
     this.http.get(`${this.url}/select/avis/`)
     .subscribe((resultData: any)=>
     {
