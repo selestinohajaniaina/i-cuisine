@@ -1,13 +1,18 @@
 <ion-header id="header">
-  <ion-toolbar ng-controller="MyCtrl">
-    <ion-title id="title">Accueil</ion-title>
+
+  <div>
     <ion-buttons slot="start">
       <ion-menu-button menuId="menu-main" class="menu"></ion-menu-button>
     </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+  </div>
 
-<ion-content>
+    <div id="title">
+      <ion-title >Accueil</ion-title>
+    </div>
+
+</ion-header>
+ 
+<ion-content id="main">
   <div class="contener">
 
     <div class="fit">
@@ -36,3 +41,37 @@
 
   </div>
 </ion-content>
+
+<ion-menu menuId="menu-main" contentId="main">
+  <ion-content>
+    <div class="contener_menu">
+
+      <div class="menu-header-bg"></div>
+
+      <div class="profil">
+        <div class="image">{{ username[0] }}</div>
+        <div class="name">{{ username }}</div>
+      </div>
+
+      <div class="espace"></div>
+
+
+        <div class="menu-list">
+          <div class="item"><ion-icon name="globe-outline"></ion-icon>&nbsp; Termes & Condition</div>
+          <div class="item" routerLink="../parametre"><ion-icon name="settings-outline"></ion-icon>&nbsp; Parametre</div>
+          <div class="item"><ion-icon name="bag-add-outline"></ion-icon>&nbsp; Decouvrir</div>
+          <div class="item"><ion-icon name="share-social-outline"></ion-icon>&nbsp; Partage</div>
+          <div class="item"><ion-icon name="bug-outline"></ion-icon>&nbsp; Signalé un bug</div>
+          <div class="item" routerLink="../apropos"><ion-icon name="information-circle-outline"></ion-icon>&nbsp; Apropos</div>
+        </div>
+        <div class="menu-bottom">
+          <div class="sous-menu" *ngIf="showSousMenu">
+            <div (click)="logout()"><ion-icon name="exit-outline"></ion-icon>&nbsp;Deconnection</div>
+            <div class="div2" (click)="sortir()"><ion-icon name="add-circle-outline"></ion-icon>&nbsp;Sortir</div>
+          </div>
+          <div class="item">{{ email }}</div>
+          <ion-icon name="ellipsis-vertical-sharp" (click)="clickBtn()"></ion-icon>
+        </div>
+    </div>
+  </ion-content>
+</ion-menu>

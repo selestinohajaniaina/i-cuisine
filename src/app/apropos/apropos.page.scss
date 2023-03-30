@@ -23,7 +23,7 @@
     }
 }
 
-.contener{
+.content{
     background: #fff;
     width: 100%;
     height: 100%;
@@ -32,25 +32,11 @@
     align-items: center;
     padding-top: 20px;
 
-    table{
-        color: #1e1e1e;
+    .detail{
+        color:black;
         width: 100%;
-        font-weight:700;
-        text-align: center;
+        font-weight: 700;
+        padding: 8px;
 
-        #head{
-            background: #1770ffec;
-            color: #fff;
-            height: 40px;
-        }
-
-        tr{
-            height: 30px;
-
-            .material-icons{
-                color: #505050;
-            }
-        }
     }
-
 }

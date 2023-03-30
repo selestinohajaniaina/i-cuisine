@@ -12,7 +12,7 @@ export class LoginPage implements OnInit {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  private url = 'https://i-c-server.onrender.com'; //'http://localhost:3000'
+  private url = 'http://localhost:3000'; //'https://i-c-server.onrender.com'
   public showPassword:boolean=true;
   public type:string= 'password';
   
@@ -59,6 +59,8 @@ export class LoginPage implements OnInit {
             console.log(resultData.data[0]);
             this.data = resultData.data[0];
             localStorage.setItem('id_user',resultData.data[0].id_user);
+            this.userForm.value.password='';
+            this.userForm.value.email='';
             this.router.navigate(['../accueil']);
           }else{
             this.error = 'mots de passe incorrect, veillez ressayer!';
