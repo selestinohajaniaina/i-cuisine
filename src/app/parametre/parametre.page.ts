@@ -18,7 +18,7 @@ export class ParametrePage implements OnInit {
   public error: string = '';
   public data:{}={};
   public id_user: number = 0;
-  private url = 'http://localhost:3000'; //'https://i-c-server.onrender.com'
+  private url = 'https://i-c-server.onrender.com'; //'http://localhost:3000'
 
   constructor(private http: HttpClient, private loadingCtrl: LoadingController, private router: Router) { }
 
