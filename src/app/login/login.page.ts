@@ -45,9 +45,7 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
-    if(localStorage.getItem('id_user')){
-      this.router.navigate(['../accueil']);
-    }
+    
   }
 
   login(email:any){

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { Browser } from '@capacitor/browser';
 
@@ -8,9 +9,13 @@ import { Browser } from '@capacitor/browser';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage  {
+export class HomePage  implements OnInit{
 
-  constructor() {
+  constructor(private router: Router) {}
 
+  ngOnInit(): void {
+    if(localStorage.getItem('id_user')){
+      this.router.navigate(['../accueil']);
+    }
   }
 }  
