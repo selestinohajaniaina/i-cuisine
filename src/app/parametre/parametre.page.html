@@ -21,8 +21,11 @@
       <input type="checkbox" (click)="checked()" name="car" id="car" >&nbsp;
       <label for="car">Afficher les caracteres</label>
     </div>
-    <ion-button>Annuler</ion-button>
-    <ion-button>Modifier</ion-button>
+    <div class="button">
+      <ion-button (click)="upDate()">Modifier</ion-button>
+      <ion-button routerLink="../accueil">Annuler</ion-button>
+      <div *ngIf="error" class="err">{{ error }}</div>
+    </div>
     
   </div>
   

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms'
 import { Router } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-signup',
@@ -16,7 +17,7 @@ export class SignupPage implements OnInit {
 
   public error='';
 
-  constructor(private http: HttpClient, private router:Router) { }
+  constructor(private http: HttpClient, private router:Router, private loadingCtrl: LoadingController) { }
 
   public showPassword:boolean=true;
   public type:string= 'password';
@@ -40,6 +41,7 @@ export class SignupPage implements OnInit {
         this.data = this.userForm.value;
         console.log(this.data);
         this.signupToDB(this.data);
+        this.showLoading();
 
       }else{
         this.data = {}
@@ -67,6 +69,14 @@ export class SignupPage implements OnInit {
           console.log(resultData,"signup Successfully");
           this.router.navigate(['../accueil']);
       });
+  }
+
+  async showLoading(){
+    const loading = await this.loadingCtrl.create({
+      message:'connexion ...',
+      duration:3000
+    });
+    loading.present();
   }
 
 }

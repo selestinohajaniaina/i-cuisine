@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms'
 import { Router } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -10,9 +11,9 @@ import { Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private loadingCtrl: LoadingController) { }
 
-  private url = 'http://localhost:3000'; //'https://i-c-server.onrender.com'
+  private url = 'https://i-c-server.onrender.com'; //'http://localhost:3000'
   public showPassword:boolean=true;
   public type:string= 'password';
   
@@ -29,7 +30,7 @@ export class LoginPage implements OnInit {
       this.data = this.userForm.value;
       this.login(this.userForm.value.email);
       this.error = '';
-
+      this.showLoading();
     }else{
 
       this.data = {}
@@ -69,6 +70,14 @@ export class LoginPage implements OnInit {
           this.error = 'compte introuvable';
         }
       });
+    }
+
+    async showLoading(){
+      const loading = await this.loadingCtrl.create({
+        message:'connexion ...',
+        duration:1500
+      });
+      loading.present();
     }
 
 

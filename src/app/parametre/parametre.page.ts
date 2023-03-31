@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-parametre',
@@ -13,10 +15,12 @@ export class ParametrePage implements OnInit {
   public username: string = '';
   public email: string = '';
   public password: string = '';
+  public error: string = '';
+  public data:{}={};
   public id_user: number = 0;
   private url = 'http://localhost:3000'; //'https://i-c-server.onrender.com'
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private loadingCtrl: LoadingController, private router: Router) { }
 
   ngOnInit() {
     // this.id_user = localStorage.getItem('id_user');
@@ -38,6 +42,43 @@ export class ParametrePage implements OnInit {
           this.username = resultData.data[0].username;
           this.password = resultData.data[0].password;
   });
+}
+
+//upDate Profil
+
+upDate(){
+  if(this.email!=''&&this.username!=''&&this.password!=''){
+      
+      //si vrai les infos
+      this.error ='';
+      this.data = {
+        email:this.email,
+        username:this.username,
+        password:this.password
+      };
+      console.log(this.data);
+      this.http.put(`${this.url}/update/${localStorage.getItem('id_user')}`,this.data).subscribe((resultData: any)=>
+    {
+      console.log(resultData);
+      
+    });
+    this.showLoading();
+
+  }else{
+
+    this.data = {}
+    this.error ='remplir tout les champs.';
+    
+  }
+}
+
+async showLoading(){
+  const loading = await this.loadingCtrl.create({
+    message:'Chargement de modification...',
+    duration:3000
+  });
+  loading.present();
+  this.router.navigate(['../accueil']);
 }
 
 }

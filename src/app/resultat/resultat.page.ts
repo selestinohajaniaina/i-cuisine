@@ -28,24 +28,13 @@ export class ResultatPage implements OnInit {
   
   //selection de tout les plat (recette) enregistré
   getAllRecette(){
-    this.http.get(`${this.url}/select/avis/`)
+    this.http.get(`${this.url}/selectAvis/`)
     .subscribe((resultData: any)=>
     {
       this.liste = resultData.result;
       console.log(this.liste);
       
-      
     });
-  }
-
-  getNamePlat(id_pl:number){
-    this.http.get(`${this.url}/select/plat/${id_pl}`)
-      .subscribe((resultData: any)=>{
-        let data1 = ({
-          id_plat:resultData.result[0].id_plat,
-          nom_plat:resultData.result[0].nom_plat
-        });
-      });
   }
 
   getNom(id:number){

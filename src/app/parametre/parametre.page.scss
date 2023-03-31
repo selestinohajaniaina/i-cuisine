@@ -55,8 +55,18 @@
         }
     }
 
-    ion-button{
+    .button {
+        width: 100%;
+        padding: 0 8px;
+
+        ion-button{
         width: 100%;
         border-radius: 150px;
     }
+    .err{
+        color: rgb(255, 66, 66);
+        font-size: 7pt;
+        text-align: center;
+    }
+}
 }

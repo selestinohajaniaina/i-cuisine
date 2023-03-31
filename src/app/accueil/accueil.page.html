@@ -1,7 +1,7 @@
 <ion-header id="header">
 
   <div>
-    <ion-buttons slot="start">
+    <ion-buttons slot="start" (click)="clickMenu()">
       <ion-menu-button menuId="menu-main" class="menu"></ion-menu-button>
     </ion-buttons>
   </div>
@@ -57,11 +57,11 @@
 
 
         <div class="menu-list">
-          <div class="item"><ion-icon name="globe-outline"></ion-icon>&nbsp; Termes & Condition</div>
+          <!-- <div class="item"><ion-icon name="globe-outline"></ion-icon>&nbsp; Termes & Condition</div> -->
           <div class="item" routerLink="../parametre"><ion-icon name="settings-outline"></ion-icon>&nbsp; Parametre</div>
-          <div class="item"><ion-icon name="bag-add-outline"></ion-icon>&nbsp; Decouvrir</div>
-          <div class="item"><ion-icon name="share-social-outline"></ion-icon>&nbsp; Partage</div>
-          <div class="item"><ion-icon name="bug-outline"></ion-icon>&nbsp; Signalé un bug</div>
+          <!-- <div class="item"><ion-icon name="bag-add-outline"></ion-icon>&nbsp; Decouvrir</div> -->
+          <div class="item" (click)="sShare()"><ion-icon name="share-social-outline"></ion-icon>&nbsp; Partage</div>
+          <div class="item"><ion-icon name="bug-outline" (click)="sendEmail()"></ion-icon>&nbsp; Signalé un bug</div>
           <div class="item" routerLink="../apropos"><ion-icon name="information-circle-outline"></ion-icon>&nbsp; Apropos</div>
         </div>
         <div class="menu-bottom">

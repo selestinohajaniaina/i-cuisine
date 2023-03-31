@@ -1,10 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { App } from '@capacitor/app';
 import { AlertController } from '@ionic/angular';
+import { SocialSharing } from '@awesome-cordova-plugins/social-sharing/ngx';
+import { EmailComposer } from '@awesome-cordova-plugins/email-composer/ngx';
 
-
+@Injectable({providedIn: 'any'})
 @Component({
   selector: 'app-accueil',
   templateUrl: './accueil.page.html',
@@ -12,23 +14,35 @@ import { AlertController } from '@ionic/angular';
 })
 export class AccueilPage implements OnInit {
 
-  private url = 'http://localhost:3000'; //'https://i-c-server.onrender.com'
+  private url = 'https://i-c-server.onrender.com'; //'http://localhost:3000'
   public username:string= '';
   public email:string='';
+  public message: string = '';
 
-  constructor(private http: HttpClient, private router: Router, private alertController: AlertController) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private alertController: AlertController,
+    private socialSharing: SocialSharing,
+    private emailComposer: EmailComposer
+    ) { }
 
   ngOnInit() {
+    this.getInfo(localStorage.getItem('id_user'));
     if(!localStorage.getItem('id_user')){
       this.router.navigate(['../']);
     }
-    this.getInfo();
   }
-
+  
   public showSousMenu = false;
-
+  
   clickBtn(){
     this.showSousMenu=!this.showSousMenu;
+  }
+  
+  clickMenu(){
+    this.getInfo(localStorage.getItem('id_user'));
+    console.log('info getting ...');
   }
 
   //show alert avant de deconnecter
@@ -55,6 +69,18 @@ export class AccueilPage implements OnInit {
       this.router.navigate(['../']);
   }
 
+  }
+
+  //share in social
+
+  sShare(){
+    this.socialSharing.shareWithOptions({
+      message:'Application de recette pour la Cuisine',
+      subject:'Application android',
+      files:[],
+      url:'',
+      chooserTitle:'CuisineApp'
+    })
   }
   
 
@@ -83,9 +109,9 @@ export class AccueilPage implements OnInit {
 
   }
 
-  getInfo(){
+  getInfo(id : any){
     //selection de l'user dans la liste for getting username and email
-    this.http.get(`${this.url}/userId/${localStorage.getItem('id_user')}`)
+    this.http.get(`${this.url}/userId/${id}`)
     .subscribe((resultData: any)=>
     {
           console.log(resultData.data[0]);
@@ -93,5 +119,14 @@ export class AccueilPage implements OnInit {
           this.username = resultData.data[0].username;
   });
 }
+
+//send message for a bug
+sendEmail(){
+  this.emailComposer.open({
+    to:'seha.karoka@gmail.com'
+  })
+}
+
+
 
 }

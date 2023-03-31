@@ -10,7 +10,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class CategoriePage implements OnInit {
 
-  private url = 'http://localhost:3000'; //'https://i-c-server.onrender.com'
+  private url = 'https://i-c-server.onrender.com'; //'http://localhost:3000'
 
   public err:string = '';
 
