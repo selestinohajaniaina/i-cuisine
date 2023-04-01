@@ -63,6 +63,9 @@ export class RecettePage implements OnInit {
       duration:1500
     });
     loading.present();
+    
   }
+
+  
 
 }
