@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { ICategorie } from '../categorie/categorie';
 import { IProduit } from './produit';
 
@@ -17,7 +17,7 @@ export class ProduitPage implements OnInit {
   public unite:string = '';
   public codeCa:string = '';
 
-  constructor(private http: HttpClient, private alertController: AlertController) { }
+  constructor(private http: HttpClient, private alertController: AlertController, private loadingCtrl: LoadingController) { }
 
   public liste: IProduit[]=[];
   public listeCat: ICategorie[]=[];
@@ -53,7 +53,9 @@ export class ProduitPage implements OnInit {
     {
         console.log(resultData,"produit Successfully");
     });
+    this.getProduit();
   }
+  
   //supression
   btnSup(id: number)
   {
@@ -61,12 +63,18 @@ export class ProduitPage implements OnInit {
   }
 
     //selection des liste de produit
-    getProduit(){
+    async getProduit(){
+
+      const loading = await this.loadingCtrl.create({
+        message:'Chargement ...',
+      });
+      loading.present();
+
       this.http.get(`${this.url}/select/produit/`)
       .subscribe((resultData: any)=>
       {
         this.liste = resultData.result;
-        
+        loading.dismiss();
         console.log(resultData.result);
       });
     }

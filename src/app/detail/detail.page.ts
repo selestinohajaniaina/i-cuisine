@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { IProduit } from '../produit/produit';
 import { IDetail } from './detail';
 
@@ -23,7 +23,7 @@ export class DetailPage implements OnInit {
   public listePro:IProduit[]=[];
   public produit:string = '';
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private alertController: AlertController) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient, private alertController: AlertController, private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
 
@@ -50,11 +50,18 @@ export class DetailPage implements OnInit {
   }
 
   //get all produit where id=id_recette for list
-  getAllProduit(){
+  async getAllProduit(){
+
+    const loading = await this.loadingCtrl.create({
+      message:'Chargement ...',
+    });
+    loading.present();
+
     this.http.get(`${this.url}/select/detail/${this.id_recette}`)
     .subscribe((resultData: any)=>
     {
       this.liste = resultData.result;
+      loading.dismiss();
       console.log(this.liste);
     });
   }

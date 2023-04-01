@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { IDetailRecette } from './resultat';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-resultat',
@@ -20,20 +21,26 @@ export class ResultatPage implements OnInit {
     {id_plat:8,nom_plat:'sosis'}
   ];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
     this.getAllRecette();
   }
   
   //selection de tout les plat (recette) enregistré
-  getAllRecette(){
+  async getAllRecette(){
+
+    const loading = await this.loadingCtrl.create({
+      message:'Chargement ...',
+    });
+    loading.present();
+
     this.http.get(`${this.url}/selectAvis/`)
     .subscribe((resultData: any)=>
     {
       this.liste = resultData.result;
+      loading.dismiss();
       console.log(this.liste);
-      
     });
   }
 

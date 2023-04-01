@@ -60,7 +60,6 @@ export class PersonnePage implements OnInit {
         rating:this.rating,
         nom_plat:this.nom_plat
       }
-      this.showLoading();
       this.sendFeedback(this.data);
       this.rating  =0;
       this.minute= 0;
@@ -70,21 +69,20 @@ export class PersonnePage implements OnInit {
     }
   }
 
-  sendFeedback(bodyData:{}){
+  async sendFeedback(bodyData:{}){
+
+    const loading = await this.loadingCtrl.create({
+      message:'Chargement ...',
+    });
+    loading.present();
+    
     //add new user
     this.http.post(`${this.url}/insert/feedback`,bodyData).subscribe((resultData: any)=>
       {
           console.log(resultData,"signup Successfully");
+          loading.dismiss();
+          this.msg = "Merci de votre note!";
       });
-  }
-
-  async showLoading(){
-    const loading = await this.loadingCtrl.create({
-      message:'en cours d\'envoie',
-      duration:3000
-    });
-    loading.present();
-    this.msg = 'Merci de votre note!';
   }
 
 }

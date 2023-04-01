@@ -19,17 +19,22 @@ export class RecettePage implements OnInit {
   constructor(private http: HttpClient, private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
-    this.showLoading();
     this.getRecette();
   }
 
   //selection
-  getRecette(){
+  async getRecette(){
+
+    const loading = await this.loadingCtrl.create({
+      message:'Chargement ...',
+    });
+    loading.present();
+
     this.http.get(`${this.url}/select/plat/`)
     .subscribe((resultData: any)=>
     {
       this.liste = resultData.result;
-      
+      loading.dismiss();
       console.log(resultData.result);
     });
   }
@@ -56,16 +61,5 @@ export class RecettePage implements OnInit {
       this.err="Champs vide non valide.";
     }
   }
-
-  async showLoading(){
-    const loading = await this.loadingCtrl.create({
-      message:'Chargement...',
-      duration:1500
-    });
-    loading.present();
-    
-  }
-
-  
 
 }

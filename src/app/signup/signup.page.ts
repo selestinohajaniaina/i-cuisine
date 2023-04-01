@@ -41,7 +41,6 @@ export class SignupPage implements OnInit {
         this.data = this.userForm.value;
         console.log(this.data);
         this.signupToDB(this.data);
-        this.showLoading();
 
       }else{
         this.data = {}
@@ -63,20 +62,17 @@ export class SignupPage implements OnInit {
   }
 
   //add new user
-  signupToDB(bodyData:{}){
+  async signupToDB(bodyData:{}){
+    const loading = await this.loadingCtrl.create({
+      message:'Validation ...',
+    });
+    loading.present();
     this.http.post(`${this.url}/person/add/`,bodyData).subscribe((resultData: any)=>
       {
           console.log(resultData,"signup Successfully");
+          loading.dismiss();
           this.router.navigate(['../accueil']);
       });
-  }
-
-  async showLoading(){
-    const loading = await this.loadingCtrl.create({
-      message:'connexion ...',
-      duration:3000
-    });
-    loading.present();
   }
 
 }

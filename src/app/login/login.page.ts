@@ -30,7 +30,6 @@ export class LoginPage implements OnInit {
       this.data = this.userForm.value;
       this.login(this.userForm.value.email);
       this.error = '';
-      this.showLoading();
     }else{
 
       this.data = {}
@@ -48,7 +47,11 @@ export class LoginPage implements OnInit {
     
   }
 
-  login(email:any){
+  async login(email:any){
+    const loading = await this.loadingCtrl.create({
+      message:'connexion ...',
+    });
+    loading.present();
     //selection de l'user dans la liste for login
       this.http.get(`${this.url}/user/${email}`)
       .subscribe((resultData: any)=>
@@ -60,22 +63,16 @@ export class LoginPage implements OnInit {
             localStorage.setItem('id_user',resultData.data[0].id_user);
             this.userForm.value.password='';
             this.userForm.value.email='';
+            loading.dismiss();
             this.router.navigate(['../accueil']);
           }else{
+            loading.dismiss();
             this.error = 'mots de passe incorrect, veillez ressayer!';
           }
         }else{
           this.error = 'compte introuvable';
         }
       });
-    }
-
-    async showLoading(){
-      const loading = await this.loadingCtrl.create({
-        message:'connexion ...',
-        duration:1500
-      });
-      loading.present();
     }
 
 

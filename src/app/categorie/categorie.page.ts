@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ICategorie } from './categorie';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-categorie',
@@ -23,16 +23,22 @@ export class CategoriePage implements OnInit {
   cat_code: string='';
   libelleCa: string='';
 
-  constructor(private http: HttpClient, private alertController: AlertController) { 
+  constructor(private http: HttpClient, private alertController: AlertController, private loadingCtrl: LoadingController) { 
   }
   
   //selection
-  getCategorie(){
+  async getCategorie(){
+
+    const loading = await this.loadingCtrl.create({
+      message:'Chargement ...',
+    });
+    loading.present();
+
     this.http.get(`${this.url}/select/categorie/`)
     .subscribe((resultData: any)=>
     {
       this.liste = resultData.result;
-      
+      loading.dismiss();
       console.log(resultData.result);
     });
   }
@@ -43,7 +49,6 @@ export class CategoriePage implements OnInit {
     {
         console.log(resultData,"categorie Successfully");
     });
-    this.getCategorie();
     this.getCategorie();
   }
 
@@ -82,9 +87,8 @@ export class CategoriePage implements OnInit {
 
 
 
-  ngOnInit() {
-
-    this.getCategorie()
+   ngOnInit() {
+    this.getCategorie();
     
   }
 
@@ -98,8 +102,6 @@ export class CategoriePage implements OnInit {
       this.addCategorie(newValue);
       this.categorieName='';
       this.categorieCode='';
-      this.getCategorie();
-      this.getCategorie();
     }else{
       this.err="Champs vide non valide.";
     }

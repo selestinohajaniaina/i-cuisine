@@ -32,7 +32,13 @@ export class ParametrePage implements OnInit {
     this.type = this.showPassword ? 'password': 'text';
   }
 
-  getInfo(){
+  async getInfo(){
+
+    const loading = await this.loadingCtrl.create({
+      message:'Recuperation des informations ...',
+    });
+    loading.present();
+
     //selection de l'user dans la liste for getting username and email
     this.http.get(`${this.url}/userId/${localStorage.getItem('id_user')}`)
     .subscribe((resultData: any)=>
@@ -41,12 +47,13 @@ export class ParametrePage implements OnInit {
           this.email = resultData.data[0].email;
           this.username = resultData.data[0].username;
           this.password = resultData.data[0].password;
+          loading.dismiss();
   });
 }
 
 //upDate Profil
 
-upDate(){
+async upDate(){
   if(this.email!=''&&this.username!=''&&this.password!=''){
       
       //si vrai les infos
@@ -57,12 +64,18 @@ upDate(){
         password:this.password
       };
       console.log(this.data);
+
+      const loading = await this.loadingCtrl.create({
+        message:'Modification, patientez ...',
+      });
+      loading.present();
+
       this.http.put(`${this.url}/update/${localStorage.getItem('id_user')}`,this.data).subscribe((resultData: any)=>
     {
       console.log(resultData);
-      
+      loading.dismiss();
     });
-    this.showLoading();
+    this.router.navigate(['../accueil']);
 
   }else{
 
@@ -72,13 +85,5 @@ upDate(){
   }
 }
 
-async showLoading(){
-  const loading = await this.loadingCtrl.create({
-    message:'Chargement de modification...',
-    duration:3000
-  });
-  loading.present();
-  this.router.navigate(['../accueil']);
-}
 
 }
