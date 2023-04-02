@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ICategorie } from './categorie';
 import { AlertController, LoadingController } from '@ionic/angular';
+import { env } from 'src/environments/environment';
 
 @Component({
   selector: 'app-categorie',
@@ -10,7 +11,7 @@ import { AlertController, LoadingController } from '@ionic/angular';
 })
 export class CategoriePage implements OnInit {
 
-  private url = 'https://i-c-server.onrender.com'; //'http://localhost:3000'
+  private url = this.env.URL_SERVER;
 
   public err:string = '';
 
@@ -23,7 +24,7 @@ export class CategoriePage implements OnInit {
   cat_code: string='';
   libelleCa: string='';
 
-  constructor(private http: HttpClient, private alertController: AlertController, private loadingCtrl: LoadingController) { 
+  constructor(private http: HttpClient, private alertController: AlertController, private loadingCtrl: LoadingController, private env: env) { 
   }
   
   //selection

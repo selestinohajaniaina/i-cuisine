@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { IDetailRecette } from './resultat';
 import { LoadingController } from '@ionic/angular';
+import { env } from 'src/environments/environment';
 
 @Component({
   selector: 'app-resultat',
@@ -10,7 +11,7 @@ import { LoadingController } from '@ionic/angular';
 })
 export class ResultatPage implements OnInit {
 
-  private url = 'https://i-c-server.onrender.com'; //'http://localhost:3000'
+  private url = this.env.URL_SERVER;
 
   public liste:IDetailRecette[] = [];
 
@@ -21,7 +22,7 @@ export class ResultatPage implements OnInit {
     {id_plat:8,nom_plat:'sosis'}
   ];
 
-  constructor(private http: HttpClient, private loadingCtrl: LoadingController) { }
+  constructor(private http: HttpClient, private loadingCtrl: LoadingController, private env: env) { }
 
   ngOnInit() {
     this.getAllRecette();

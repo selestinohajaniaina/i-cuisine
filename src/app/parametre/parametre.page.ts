@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
+import { env } from 'src/environments/environment';
 
 @Component({
   selector: 'app-parametre',
@@ -18,9 +19,9 @@ export class ParametrePage implements OnInit {
   public error: string = '';
   public data:{}={};
   public id_user: number = 0;
-  private url = 'https://i-c-server.onrender.com'; //'http://localhost:3000'
+  private url = this.env.URL_SERVER;
 
-  constructor(private http: HttpClient, private loadingCtrl: LoadingController, private router: Router) { }
+  constructor(private http: HttpClient, private loadingCtrl: LoadingController, private router: Router, private env: env) { }
 
   ngOnInit() {
     // this.id_user = localStorage.getItem('id_user');

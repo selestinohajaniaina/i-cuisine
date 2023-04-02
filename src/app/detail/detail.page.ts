@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { IProduit } from '../produit/produit';
 import { IDetail } from './detail';
+import { env } from 'src/environments/environment';
 
 @Component({
   selector: 'app-detail',
@@ -12,7 +13,7 @@ import { IDetail } from './detail';
 })
 export class DetailPage implements OnInit {
 
-  private url = 'https://i-c-server.onrender.com'; //'http://localhost:3000'
+  private url = this.env.URL_SERVER;
   public nbrPerson:number = 0;
   public qteProduit:number = 0;
   public id_recette:number = 0;
@@ -23,7 +24,7 @@ export class DetailPage implements OnInit {
   public listePro:IProduit[]=[];
   public produit:string = '';
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private alertController: AlertController, private loadingCtrl: LoadingController) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient, private alertController: AlertController, private loadingCtrl: LoadingController, private env: env) { }
 
   ngOnInit() {
 

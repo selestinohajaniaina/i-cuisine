@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SocialSharing } from '@awesome-cordova-plugins/social-sharing/ngx';
 import { EmailComposer } from '@awesome-cordova-plugins/email-composer/ngx';
+import { env } from 'src/environments/environment';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { EmailComposer } from '@awesome-cordova-plugins/email-composer/ngx';
   providers: [
     SocialSharing,
     EmailComposer,
+    env,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
