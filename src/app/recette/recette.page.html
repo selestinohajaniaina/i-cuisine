@@ -1,40 +1,41 @@
-<ion-header id="header">
-
-  <div class="back">
-    <ion-back-button id="back"></ion-back-button>
-  </div>
-
-    <div id="title">
-      <ion-title >Recette</ion-title>
-    </div>
-
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title size="large" class="ion-text-center">Recette</ion-title>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div class="content">
+<ion-content color="light">
 
-    <div class="p">Ajouter votre nouveau recette</div>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Ajouter votre nouveau recette:</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-input type="text" [(ngModel)]="nom_plat" placeholder="nom du recette"></ion-input>
+      </ion-item>
+      <ion-button expand="block" shape="round" (click)="btnAjout()">
+        <ion-icon name="add-circle-outline"></ion-icon> &nbsp;
+      Ajouter
+      </ion-button>
+      <div *ngIf="err" class="err">{{ err }}</div>
+    </ion-card-content>
+</ion-card>
 
-      <div class="form">
-        <input type="text" [(ngModel)]="nom_plat" placeholder="nom du recette">
-        <button (click)="btnAjout()">
-          <span class="material-icons">control_point</span>
-        </button>
-      </div>
+<ion-card>
+  <ion-card-header>
+    <ion-card-subtitle>Ou choisir dans cette liste:</ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-list>
+      <ion-item *ngFor="let listeRecetteLength of liste" class="listeRec" routerLink="../personne/{{listeRecetteLength.id_plat}}">
+        {{ listeRecetteLength.nom_plat }}
+      </ion-item>
+    </ion-list>
+  </ion-card-content>
+</ion-card>
 
-    <span *ngIf="err" class="err">{{ err }}</span>
-
-    <div class="p">Ou choisir dans cette liste:</div>
-    
-      <div class="listeRecContent">
-        <div *ngFor="let listeRecetteLength of liste" class="listeRec" routerLink="../personne/{{listeRecetteLength.id_plat}}">
-          <!-- <td>{{ listeRecetteLength.id_plat }}</td> -->
-          {{ listeRecetteLength.nom_plat }}
-          <!-- <td (click)="btnSup(listeLength.cat_id)">
-            <span class="material-icons">delete</span>
-          </td> -->
-        </div>
-      </div>
-
-  </div>
 </ion-content>

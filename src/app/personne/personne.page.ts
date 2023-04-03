@@ -67,6 +67,7 @@ export class PersonnePage implements OnInit {
       this.dificulte = '';
     }else{
       this.error = 'Champs vide non valide!';
+      this.msg = "";
     }
   }
 
@@ -83,6 +84,7 @@ export class PersonnePage implements OnInit {
           console.log(resultData,"signup Successfully");
           loading.dismiss();
           this.msg = "Merci de votre note!";
+          this.error = '';
       });
   }
 

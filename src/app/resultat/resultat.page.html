@@ -1,30 +1,40 @@
-<ion-header id="header">
-
-  <div class="back">
-    <ion-back-button id="back"></ion-back-button>
-  </div>
-
-    <div id="title">
-      <ion-title >Notes</ion-title>
-    </div>
-
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title size="large" class="ion-text-center">Notes</ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-searchbar color="primary" [(ngModel)]="recetteFilter"></ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="contener">
-    <table border="1">
-      <tr id="head">
-        <td>Libelle</td>
-        <td>temps <br> (min)</td>
-        <td>Difficulté</td>
-        <td>Rating</td>
-      </tr>
-        <tr *ngFor="let listeLength of liste"> 
-          <td>{{ listeLength.nom_plat }}</td>
-          <td>{{ listeLength.temps }}</td>
-          <td>{{ (listeLength.dificulte) }}</td>
-          <td>{{ (listeLength.etoile=="1"?"⭐":listeLength.etoile=="2"?"⭐⭐":listeLength.etoile=="3"?"⭐⭐⭐":listeLength.etoile=="4"?"⭐⭐⭐⭐":"⭐⭐⭐⭐⭐") }}</td>
-        </tr>
-    </table>
-  </div>
+
+  <ion-card *ngFor="let listeLength of filteredRecette">
+    <ion-card-header>
+      <ion-card-title>{{ listeLength.nom_plat }}</ion-card-title>
+    </ion-card-header>
+    
+    <ion-card-content>
+
+            <ion-list>
+              <ion-item>
+                <ion-label>Durré</ion-label>
+                <ion-badge color="primary">{{ listeLength.temps }} min</ion-badge>
+              </ion-item>
+               <ion-item>
+              <ion-label>Difficulté</ion-label>
+              <ion-badge color="{{ listeLength.dificulte=='difficile' ? 'danger':listeLength.dificulte=='moyen'?'warning':'tertiary'}}">{{ (listeLength.dificulte) }}</ion-badge>
+              </ion-item>
+               <ion-item>
+              <ion-label>Etoile</ion-label>
+              <ion-badge color="success">⭐{{ listeLength.etoile }} </ion-badge>
+              </ion-item>
+            </ion-list>
+      
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>

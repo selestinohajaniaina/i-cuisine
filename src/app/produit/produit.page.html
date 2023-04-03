@@ -1,46 +1,54 @@
-<ion-header id="header">
-
-  <div class="back">
-    <ion-back-button id="back"></ion-back-button>
-  </div>
-
-    <div id="title">
-      <ion-title >Produit</ion-title>
-    </div>
-
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title size="large" class="ion-text-center">Produit</ion-title>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="contener">
 
-    <div class="form">
-      <input type="text" [(ngModel)]="libellePro" placeholder="Libelle">
-      <select [(ngModel)]="codeCa" >
-        <option *ngFor="let listeCatLength of listeCat" [value]="listeCatLength.cat_code">{{ listeCatLength.cat_code }}</option>
-      </select>
-      <select [(ngModel)]="unite">
-        <option value="L">litre</option>
-        <option value="kg">Kg</option>
-        <option value="pcs">piece</option>
-      </select>
-    <button (click)="btnAjout()">
-      <span class="material-icons">control_point</span>
-    </button>
-  </div>
-  <span *ngIf="err" class="err">{{ err }}</span>
-    <table border="1">
-      <tr id="head">
-        <td>Libelle</td>
-        <td>Categorie</td>
-      </tr>
+  <ion-card>
+    <ion-item>
+    <ion-input type="text" [(ngModel)]="libellePro" placeholder="Libelle"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-select aria-label="Fruit" interface="popover" placeholder="choisir la categorie" [(ngModel)]="codeCa">
+        <ion-select-option *ngFor="let listeCatLength of listeCat" [value]="listeCatLength.cat_code">{{ listeCatLength.cat_code }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-select aria-label="Fruit" interface="popover" placeholder="choisir l'unité" [(ngModel)]="unite">
+        <ion-select-option value="L">litre</ion-select-option>
+        <ion-select-option value="kg">Kg</ion-select-option>
+        <ion-select-option value="pcs">piece</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-button expand="block" shape="round" (click)="btnAjout()">
+      <ion-icon name="add-circle-outline"></ion-icon> &nbsp;
+      Ajouter
+    </ion-button>
+    <span *ngIf="err" class="err" style="font-size: 8pt;color: #ff6f6f;">{{ err }}</span>
+  </ion-card>
+
+  <ion-card color="light">
+    <div class="contener">
+      <table border="1">
+        <tr id="head">
+          <td>Libelle</td>
+          <td>Categorie</td>
+        </tr>
         <tr *ngFor="let listeLength of liste">
           <td>{{ listeLength.libellePro +" ("+listeLength.unite+")" }}</td>
           <td>{{ listeLength.codeCa }}</td>
           <td (click)="btnSup(listeLength.codePro)">
-            <span class="material-icons">delete</span>
+            <ion-icon name="trash-outline"></ion-icon>
           </td>
         </tr>
-    </table>
+      </table>
+    </div>
+  </ion-card>
 
-  </div>
 </ion-content>

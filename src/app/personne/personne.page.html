@@ -9,43 +9,55 @@
 
 <ion-content color="light">
 
-  <div class="contener">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Ajouter le nombre des personnes:</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+            <ion-input type="number" [(ngModel)]="nbrPerson" placeholder="nombre du personne" shape="round"></ion-input>
+            <ion-button routerLink="../../detail/{{id_recette}}" *ngIf="nbrPerson > 0" [queryParams]="{person: nbrPerson}" shape="round">
+              <ion-icon name="checkmark-done-outline"></ion-icon>
+            </ion-button>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
 
-    <div class="form">
-      <ion-input type="number" [(ngModel)]="nbrPerson" placeholder="nombre du personne" shape="round"></ion-input>
-      <ion-button routerLink="../../detail/{{id_recette}}" *ngIf="nbrPerson > 0" [queryParams]="{person: nbrPerson}" shape="round">
-      <ion-icon name="checkmark-done-outline"></ion-icon>
-    </ion-button>
-    </div>
+  <ion-card color="light">
+    <ion-card-header>
+      <ion-card-subtitle>Mettez votre note de cette recette:</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
 
-    <div class="note">
-      <div>
-      Remarque:
-      </div>
-      <div class="form-bottom">
-        <input type="number" [(ngModel)]="minute" placeholder="temps (min)">
-        <select [(ngModel)]="dificulte">
-          <option value="facile">facile</option>
-          <option value="moyen">moyen</option>
-          <option value="difficile">difficile</option>
-        </select>
-        <select [(ngModel)]="rating">
-          <option value=1>⭐</option>
-          <option value=2>⭐⭐</option>
-          <option value=3>⭐⭐⭐</option>
-          <option value=4>⭐⭐⭐⭐</option>
-          <option value=5>⭐⭐⭐⭐⭐</option>
-        </select>
-      </div>
-      <div class="btn">
-        <ion-button expand="block" (click)="btnSend()">
-          <ion-icon name="arrow-undo-outline"></ion-icon>&nbsp;
-          Envoyer</ion-button>
-      </div>
-    </div>
-    <span *ngIf="error" class="err">{{ error }}</span>
-    <span *ngIf="msg" class="msg">{{ msg }}</span>
-
-  </div>
+      <ion-item>
+        <ion-label position="stacked">durré (min)</ion-label>
+        <ion-input type="number" [(ngModel)]="minute" placeholder="temps (min)" shape="round"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-select aria-label="difficulte" interface="popover" placeholder="choisir mode" [(ngModel)]="dificulte">
+          <ion-select-option value="facile">facile</ion-select-option>
+          <ion-select-option value="moyen">moyen</ion-select-option>
+          <ion-select-option value="difficile">difficile</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-select aria-label="difficulte" interface="popover" placeholder="choisir l'etoile" [(ngModel)]="rating">
+          <ion-select-option value=1>⭐</ion-select-option>
+          <ion-select-option value=2>⭐⭐</ion-select-option>
+          <ion-select-option value=3>⭐⭐⭐</ion-select-option>
+          <ion-select-option value=4>⭐⭐⭐⭐</ion-select-option>
+          <ion-select-option value=5>⭐⭐⭐⭐⭐</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-button expand="block" shape="round" (click)="btnSend()">
+        <ion-icon name="arrow-undo-outline"></ion-icon>&nbsp;
+        Envoyer
+      </ion-button>
+    </ion-card-content>
+    <div *ngIf="error" class="err">{{ error }}</div>
+      <div *ngIf="msg" class="msg">{{ msg }}</div>
+  </ion-card>
 
 </ion-content>

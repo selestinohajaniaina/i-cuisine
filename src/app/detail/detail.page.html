@@ -17,15 +17,20 @@
           <ion-select-option *ngFor="let listeProLength of listePro" [value]="listeProLength.libellePro+'='+listeProLength.unite">{{ listeProLength.libellePro }}</ion-select-option>
         </ion-select>
       </ion-item>
+      <ion-item>
+        <ion-input type="text" placeholder="variété du produit" [(ngModel)]="varProduit"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Ajouter la quantité</ion-label>
+        <ion-input type="number" placeholder="L ou kg ou pcs" [(ngModel)]="qteProduit"></ion-input>
+      </ion-item>
     </ion-list>
 
-    <ion-input type="text" placeholder="variete" [(ngModel)]="varProduit"></ion-input>
-    <ion-input type="number" placeholder="L ou kg ou pcs" [(ngModel)]="qteProduit"></ion-input>
     <ion-button expand="block" shape="round" (click)="btnAjout()">
       <ion-icon name="add-circle-outline"></ion-icon> &nbsp;
       Ajouter
     </ion-button>
-    <span *ngIf="err" class="err" style="font-size: 8pt;color: #ff6f6f;">{{ err }}</span>
+    <div *ngIf="err" class="err">{{ err }}</div>
   </ion-card>
 
   <ion-card color="light">
