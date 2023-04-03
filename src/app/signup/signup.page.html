@@ -1,27 +1,37 @@
-<ion-header id="header">
-
-  <div class="back">
-    <ion-back-button id="back"></ion-back-button>
-  </div>
-
-    <div id="title">
-      <ion-title >Sign up</ion-title>
-    </div>
-
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title size="large" class="ion-text-center">Sign up</ion-title>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <form id="form" [formGroup]="userForm">
-    <input type="text" placeholder="Utilisateur" formControlName="username">
-    <input type="email" placeholder="Email" formControlName="email">
-    <input [type]="type" placeholder="mots de passe" formControlName="password">
-    <input [type]="type" placeholder="confirme" formControlName="confirm">
-    <div id="caractere">
-      <input type="checkbox" (click)="checked()" name="car" id="car" >&nbsp;
-      <label for="car">Afficher les caracteres</label>
-    </div>
-    <ion-button expand="block" class="login" shape="round" (click)="submit()">Login</ion-button>
-    <span *ngIf="error" class="err">{{ error }}</span>
-  </form>
-</ion-content>
- 
+<ion-content color="light">
+
+  <ion-card>
+    <form id="form" [formGroup]="userForm">
+      <ion-item>
+        <ion-input type="text" placeholder="Utilisateur" formControlName="username"></ion-input>
+        </ion-item>
+      <ion-item>
+      <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input [type]="type" placeholder="mots de passe" formControlName="password"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input [type]="type" placeholder="confirme" formControlName="confirm"></ion-input>
+      </ion-item>
+  
+      <div id="caractere">
+        <ion-checkbox labelPlacement="end" (click)="checked()" name="checkbox"></ion-checkbox>
+        <ion-label for="checkbox">Afficher les caracteres</ion-label>
+      </div>
+  
+      <ion-button expand="block" shape="round" (click)="submit()">connexion</ion-button>
+      <span *ngIf="error" class="err">{{ error }}</span>
+    </form>
+  </ion-card>
+  
+  </ion-content>

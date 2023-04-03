@@ -1,46 +1,47 @@
-<ion-header id="header">
+<ion-header>
+  <ion-toolbar color="primary">
 
-  <div>
     <ion-buttons slot="start" (click)="clickMenu()">
       <ion-menu-button menuId="menu-main" class="menu"></ion-menu-button>
     </ion-buttons>
-  </div>
-
-    <div id="title">
-      <ion-title >Accueil</ion-title>
-    </div>
-
+    <ion-title size="large" class="ion-text-center">Accueil</ion-title>
+    
+  </ion-toolbar>
 </ion-header>
  
-<ion-content id="main">
-  <div class="contener">
+<ion-content id="main" color="light">
 
-    <div class="fit">
+  <ion-card routerLink="../categorie">
+    <ion-img src="assets/cat.jpg" />
+    <ion-card-header color="medium">
+      <ion-card-title>Categorie</ion-card-title>
+    </ion-card-header>
+  </ion-card>
 
-      <div class="group" routerLink="../categorie">
-        <div><img src="assets/cat.jpg"></div>
-        <div class="label">Categorie</div>
-      </div>
-  
-      <div class="group" routerLink="../produit">
-        <div><img src="assets/pro.jpg"></div>
-        <div class="label">Produit</div>
-      </div>
-  
-      <div class="group" routerLink="../recette">
-        <div><img src="assets/pla.jpg"></div>
-        <div class="label">Recette</div>
-      </div>
-  
-      <div class="group" routerLink="../resultat">
-        <div><img src="assets/res.jpg"></div>
-        <div class="label">Notes</div>
-      </div>
+  <ion-card routerLink="../produit">
+    <ion-img src="assets/pro.jpg" />
+    <ion-card-header color="medium">
+      <ion-card-title>Produit</ion-card-title>
+    </ion-card-header>
+  </ion-card>
 
-    </div>
+  <ion-card routerLink="../recette">
+    <ion-img src="assets/pla.jpg" />
+    <ion-card-header color="medium">
+      <ion-card-title>Recette</ion-card-title>
+    </ion-card-header>
+  </ion-card>
 
-  </div>
+  <ion-card routerLink="../resultat">
+    <ion-img src="assets/res.jpg" />
+    <ion-card-header color="medium">
+      <ion-card-title>Notes</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
 </ion-content>
+
+
 
 <ion-menu menuId="menu-main" contentId="main">
   <ion-content>

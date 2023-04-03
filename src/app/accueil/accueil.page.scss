@@ -1,84 +1,20 @@
-#header {
-    color: rgb(241 245 249);
-    background-color: #ef4444;
-    display: flex;
-    align-items: center;
-    height: 4rem;
-    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-
-     .menu{
-        color: #fff;
-        transform: scale(1.2);
-    }
-    
-    #title {
-        color: rgb(241 245 249);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        
-        ion-title{
-            text-align: center;
-            font-size: 20pt;
-            line-height: 1.75rem;
-        }
-    }
-}
-
-.contener{
-    background: #fff;
-    padding: 5px;
-    color: #1e1e1e;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    overflow-y: auto;
-
-    .fit{
-        width: fit-content;
-
-        .group{
-            width: 320px;
-            height: 230px;
-            margin: 10px;
-            position: relative;
-            overflow: hidden;
-            border-radius: 8px;
-            border: #c0c0c0 solid 2px;
-            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-    
-            img{
-                position: absolute;
-                bottom: 0;
-                height: auto;
-                width: 100%;
-            }
-    
-            .label{
-                position: absolute;
-                bottom: 0;
-                width: 100%;
-                padding: 15px;
-                font-size: 15pt;
-                font-weight: bold;
-                text-align: center;
-                color: #757575;
-                background: #6b6b6b4f;
-            }
-        }
-    }
-}
+ion-menu::part(backdrop) {
+    background-color: rgba(0, 32, 68, 0.5);
+  }
+  
+  ion-menu::part(container) {
+    border-radius: 0 20px 20px 0;
+  
+    box-shadow: 4px 0px 16px rgba(0, 32, 68, 0.5);
+  }
+  
 
 .menu-header-bg{
     position: absolute;
     height: 180px;
     width: 350px;
-    background: #ef4444;
-    box-shadow: 0 1px 10px #ef4444ad;
+    background: #3a7be0;
+    box-shadow: 0 1px 10px #1e3f74;
     transform: rotate(-15deg);
     border-radius: 10px 10px 10px 50px;
     margin: -50px 0 60px -15px;
@@ -144,8 +80,8 @@
     }
 
     .menu-bottom{
-        background: rgb(226, 30, 30);
-        box-shadow: 0 -1px 10px #ef4444ad;
+        background: #3a7be0;
+        box-shadow: 0 -1px 10px #1e3f74;
         position: absolute;
         bottom: 0;
         width: 100%;

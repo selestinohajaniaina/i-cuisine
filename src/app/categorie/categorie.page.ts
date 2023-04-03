@@ -51,6 +51,7 @@ export class CategoriePage implements OnInit {
         console.log(resultData,"categorie Successfully");
     });
     this.getCategorie();
+    this.getCategorie();
   }
 
   //supression

@@ -79,7 +79,7 @@ export class DetailPage implements OnInit {
 
   //click sur btnAjout
   btnAjout(){
-    if(this.qteProduit>0){
+    if(this.qteProduit>0&&this.produit!=''){
       let newValue = {
         "id_plat":this.id_recette,
         "libellePro" : this.produit,

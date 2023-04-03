@@ -1,24 +1,21 @@
-<ion-header id="header">
-
-  <div class="back">
-    <ion-back-button id="back"></ion-back-button>
-  </div>
-
-    <div id="title">
-      <ion-title >Personne</ion-title>
-    </div>
-
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title size="large" class="ion-text-center">Nombre de personne</ion-title>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content color="light">
 
   <div class="contener">
 
     <div class="form">
-      <input type="number" placeholder="nombre du personne" [(ngModel)]="nbrPerson">
-    <button routerLink="../../detail/{{id_recette}}" *ngIf="nbrPerson > 0" [queryParams]="{person: nbrPerson}">
+      <ion-input type="number" [(ngModel)]="nbrPerson" placeholder="nombre du personne" shape="round"></ion-input>
+      <ion-button routerLink="../../detail/{{id_recette}}" *ngIf="nbrPerson > 0" [queryParams]="{person: nbrPerson}" shape="round">
       <ion-icon name="checkmark-done-outline"></ion-icon>
-    </button>
+    </ion-button>
     </div>
 
     <div class="note">

@@ -1,39 +1,40 @@
-<ion-header id="header">
-
-  <div class="back">
-    <ion-back-button id="back"></ion-back-button>
-  </div>
-
-    <div id="title">
-      <ion-title >Categorie</ion-title>
-    </div>
-
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title size="large" class="ion-text-center">Categorie</ion-title>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content color="light">
 
-  <div class="content">
-      <div class="form">
-        <input type="text" [(ngModel)]="categorieCode" placeholder="code">
-        <input type="text" [(ngModel)]="categorieName" placeholder="Libelle">
-      <button (click)="btnAjout()">
-        <span class="material-icons">control_point</span>
-      </button>
-    </div>
-    <span *ngIf="err" class="err">{{ err }}</span>
-    <table border="1">
-      <tr id="head">
-        <td>code</td>
-        <td>Libelle</td>
-      </tr>
-        <tr *ngFor="let listeLength of liste">
-          <td>{{ listeLength.cat_code }}</td>
-          <td>{{ listeLength.libelleCa }}</td>
-          <td (click)="btnSup(listeLength.cat_id)">
-            <span class="material-icons">delete</span>
-          </td>
+  <ion-card>
+    <ion-input type="text" placeholder="code" [(ngModel)]="categorieCode"></ion-input>
+    <ion-input type="text" placeholder="Libelle" [(ngModel)]="categorieName"></ion-input>
+    <ion-button expand="block" shape="round" (click)="btnAjout()">
+      <ion-icon name="add-circle-outline"></ion-icon> &nbsp;
+      Ajouter
+    </ion-button>
+    <span *ngIf="err" class="err" style="font-size: 8pt;color: #ff6f6f;">{{ err }}</span>
+  </ion-card>
+
+  <ion-card color="light">
+    <div class="content">
+      <table border="1">
+        <tr id="head">
+          <td>code</td>
+          <td>Libelle</td>
         </tr>
-    </table>
-  </div>
+          <tr *ngFor="let listeLength of liste">
+            <td>{{ listeLength.cat_code }}</td>
+            <td>{{ listeLength.libelleCa }}</td>
+            <td (click)="btnSup(listeLength.cat_id)">
+              <ion-icon name="trash-outline"></ion-icon>
+            </td>
+          </tr>
+      </table>
+    </div>
+  </ion-card>
   
 </ion-content>

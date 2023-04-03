@@ -1,15 +1,19 @@
-<ion-header id="header">
-
-    <div id="title">
-      <ion-title >Accueil</ion-title>
-    </div>
-
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title size="large" class="ion-text-center">Accueil</ion-title>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div id="contener">
-    <img src="assets/cuisine.jpg" width="250px" class="logo" alt="cuisine">
-    <ion-button class="actionBtn" routerLink="../login">Login</ion-button>
-    <ion-button class="actionBtn" routerLink="../signup">Sign up</ion-button>
-  </div>
+<ion-content color="light">
+  <ion-card>
+    <div id="contener">
+      <img src="assets/cuisine.jpg" width="250px" class="logo" alt="cuisine">
+      <ion-button class="actionBtn" expand="block" shape="round" routerLink="../login">
+        <ion-icon name="person-circle-outline"></ion-icon>&nbsp; Login
+      </ion-button>
+      <ion-button class="actionBtn" expand="block" shape="round" routerLink="../signup">
+        <ion-icon name="person-add-outline"></ion-icon> &nbsp; Sign up
+      </ion-button>
+    </div>
+  </ion-card>
 </ion-content>
