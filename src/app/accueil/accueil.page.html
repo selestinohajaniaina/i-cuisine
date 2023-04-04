@@ -43,7 +43,7 @@
 
 
 
-<ion-menu menuId="menu-main" contentId="main">
+<ion-menu menuId="menu-main" contentId="main" color="light">
   <ion-header>
 
     <div class="menu-header-bg"></div>
@@ -53,17 +53,30 @@
       </div>
 
   </ion-header>
-  <ion-content>
+  <ion-content color="light">
+    <ion-list>
+      <ion-item routerLink="../parametre">
+        Parametre
+        <ion-icon name="settings-outline" slot="start"></ion-icon>
+      </ion-item>
+      <ion-item routerLink="./">
+        Decouvrir
+        <ion-icon name="bag-add-outline" slot="start"></ion-icon>
+      </ion-item>
+      <ion-item (click)="sShare()" routerLink="./">
+        Partage
+        <ion-icon name="share-social-outline" slot="start"></ion-icon>
+      </ion-item>
+      <ion-item (click)="sendEmail()" routerLink="./">
+        Signalé un bug
+        <ion-icon name="bug-outline" slot="start"></ion-icon>
+      </ion-item>
+      <ion-item routerLink="../apropos">
+        Apropos
+        <ion-icon name="information-circle-outline" slot="start"></ion-icon>
+      </ion-item>
+    </ion-list> 
     <div class="contener_menu">
-
-        <div class="menu-list">
-          <!-- <div class="item"><ion-icon name="globe-outline"></ion-icon>&nbsp; Termes & Condition</div> -->
-          <div class="item" routerLink="../parametre"><ion-icon name="settings-outline"></ion-icon>&nbsp; Parametre</div>
-          <!-- <div class="item"><ion-icon name="bag-add-outline"></ion-icon>&nbsp; Decouvrir</div> -->
-          <div class="item" (click)="sShare()"><ion-icon name="share-social-outline"></ion-icon>&nbsp; Partage</div>
-          <div class="item"><ion-icon name="bug-outline" (click)="sendEmail()"></ion-icon>&nbsp; Signalé un bug</div>
-          <div class="item" routerLink="../apropos"><ion-icon name="information-circle-outline"></ion-icon>&nbsp; Apropos</div>
-        </div>
         <div class="menu-bottom">
           <div class="item">{{ email }}</div>
 

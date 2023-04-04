@@ -76,13 +76,14 @@ export class AccueilPage implements OnInit {
   //share in social
 
   sShare(){
-    this.socialSharing.shareWithOptions({
-      message:'Application de recette pour la Cuisine',
-      subject:'Application android',
-      files:[],
-      url:'',
-      chooserTitle:'CuisineApp'
-    })
+    // Share via email
+    this.socialSharing.shareViaEmail('Body', 'Subject', ['recipient@example.org']).then((e) => {
+    // Success!
+    console.log('succes in share',e);
+    }).catch((e) => {
+    // Error!
+    console.log('error in share',e);
+    });
   }
   
 

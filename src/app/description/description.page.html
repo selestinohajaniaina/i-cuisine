@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title size="large" class="ion-text-center">description</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+
+  <ion-card>
+    <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+    <ion-card-header>
+      <ion-card-title>{{ liste.nom_plat }}</ion-card-title>
+    </ion-card-header>
+    
+    <ion-card-content>
+
+               <ion-item>
+              Etoile
+              <ion-badge color="success" slot="end">⭐{{ liste.etoile }} </ion-badge>
+              </ion-item>
+              <ion-item>
+                dificulte
+                <ion-badge color="success" slot="end">{{ liste.dificulte }} </ion-badge>
+                </ion-item>
+                <ion-item>
+                  temps
+                  <ion-badge color="primary" slot="end">{{ liste.temps }} min</ion-badge>
+                  </ion-item>
+      
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
