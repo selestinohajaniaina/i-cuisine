@@ -10,7 +10,7 @@
 <ion-content color="light">
 
   <ion-card>
-    <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+    <img alt="Silhouette of mountains" src="{{ liste.img }}" />
     <ion-card-header>
       <ion-card-title>{{ liste.nom_plat }}</ion-card-title>
     </ion-card-header>
@@ -18,18 +18,29 @@
     <ion-card-content>
 
                <ion-item>
-              Etoile
-              <ion-badge color="success" slot="end">⭐{{ liste.etoile }} </ion-badge>
+              étoile
+              <ion-badge color="success" slot="end">⭐ {{ liste.etoile }} </ion-badge>
               </ion-item>
               <ion-item>
-                dificulte
-                <ion-badge color="success" slot="end">{{ liste.dificulte }} </ion-badge>
+                difficulté
+                <ion-badge color="{{ liste.dificulte=='facile'?'tertiary':liste.dificulte=='moyen'?'warning':'danger'}}" slot="end">{{ liste.dificulte }} </ion-badge>
                 </ion-item>
                 <ion-item>
-                  temps
+                  durrée
                   <ion-badge color="primary" slot="end">{{ liste.temps }} min</ion-badge>
                   </ion-item>
       
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>
+        Description:
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      {{ liste.description }} 
     </ion-card-content>
   </ion-card>
 

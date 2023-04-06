@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SocialSharing } from '@awesome-cordova-plugins/social-sharing/ngx';
 import { EmailComposer } from '@awesome-cordova-plugins/email-composer/ngx';
 import { env } from 'src/environments/environment';
+import { Camera } from '@awesome-cordova-plugins/camera/ngx';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { env } from 'src/environments/environment';
     SocialSharing,
     EmailComposer,
     env,
+    Camera,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

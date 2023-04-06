@@ -5,6 +5,7 @@ import { AlertController, LoadingController } from '@ionic/angular';
 import { IProduit } from '../produit/produit';
 import { IDetail } from './detail';
 import { env } from 'src/environments/environment';
+import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 
 @Component({
   selector: 'app-detail',
@@ -24,7 +25,14 @@ export class DetailPage implements OnInit {
   public listePro:IProduit[]=[];
   public produit:string = '';
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private alertController: AlertController, private loadingCtrl: LoadingController, private env: env) { }
+  constructor(
+    private route: ActivatedRoute,
+    private http: HttpClient,
+    private alertController: AlertController,
+    private loadingCtrl: LoadingController,
+    private env: env,
+    private camera: Camera
+    ) { }
 
   ngOnInit() {
 
@@ -137,6 +145,27 @@ export class DetailPage implements OnInit {
       console.log(role);
     }
 
+  }
+
+  //takePhoto
+
+  takePhoto(){
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+    
+    this.camera.getPicture(options).then((imageData) => {
+     // imageData is either a base64 encoded string or a file URI
+     // If it's base64 (DATA_URL):
+     let base64Image = 'data:image/jpeg;base64,' + imageData;
+     console.log('succes',base64Image);
+    }, (err) => {
+     // Handle error
+     console.log('error');
+    });
   }
 
 }

@@ -57,8 +57,11 @@ export class DescriptionPage implements OnInit {
     {
       console.log(resultData.result[0]);
       if(resultData.result[0]){
-        this.liste.img = resultData.result[0].img?resultData.result[0].img:'';
-        this.liste.description= resultData.result[0].description?resultData.result[0].description:'';
+        this.liste.img = resultData.result[0].img?resultData.result[0].img:'./assets/card-media.png';
+        this.liste.description= resultData.result[0].description?resultData.result[0].description:'No description';
+      }else{
+        this.liste.img = './assets/card-media.png';
+        this.liste.description = '(No description)';
       }
       loading.dismiss();
       console.log(this.liste);

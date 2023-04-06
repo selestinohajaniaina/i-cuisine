@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Injectable, OnInit } from '@angular/core';
+import { Component, Injectable, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { App } from '@capacitor/app';
 import { AlertController } from '@ionic/angular';
@@ -14,6 +14,8 @@ import { env } from 'src/environments/environment';
   styleUrls: ['./accueil.page.scss'],
 })
 export class AccueilPage implements OnInit {
+
+  @Input()
 
   private url = this.env.URL_SERVER;
   public username:string= '';
