@@ -5,7 +5,7 @@ import { App } from '@capacitor/app';
 import { AlertController } from '@ionic/angular';
 import { SocialSharing } from '@awesome-cordova-plugins/social-sharing/ngx';
 import { EmailComposer } from '@awesome-cordova-plugins/email-composer/ngx';
-import { env } from 'src/environments/environment';
+// import { env } from 'src/environments/environment';
 
 @Injectable({providedIn: 'any'})
 @Component({
@@ -17,7 +17,7 @@ export class AccueilPage implements OnInit {
 
   @Input()
 
-  private url = this.env.URL_SERVER;
+  private url = 'http://localhost:3000';// this.env.URL_SERVER
   public username:string= '';
   public email:string='';
   public message: string = '';
@@ -28,7 +28,7 @@ export class AccueilPage implements OnInit {
     private alertController: AlertController,
     private socialSharing: SocialSharing,
     private emailComposer: EmailComposer,
-    private env: env
+    // private env: env
     ) { }
 
   ngOnInit() {

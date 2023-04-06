@@ -7,10 +7,10 @@ export const environment = {
   URL_SERVER: 'http://localhost:3000'
 };
 
-export class env {
-  production= false;
-  URL_SERVER= 'http://localhost:3000'
-};
+// export class env {
+//   production= false;
+//   URL_SERVER= 'http://localhost:3000'
+// };
 
 /*
  * For easier debugging in development mode, you can import the following file

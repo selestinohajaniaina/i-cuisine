@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { IDetailRecette } from './resultat';
 import { LoadingController } from '@ionic/angular';
-import { env } from 'src/environments/environment';
+// import { env } from 'src/environments/environment';
 
 @Component({
   selector: 'app-resultat',
@@ -11,7 +11,7 @@ import { env } from 'src/environments/environment';
 })
 export class ResultatPage implements OnInit {
 
-  private url = this.env.URL_SERVER;
+  private url = 'http://localhost:3000';// this.env.URL_SERVER
   private _recetteFilter: string = '';
   public filteredRecette:IDetailRecette[] = [];
   public liste:IDetailRecette[] = [];
@@ -23,7 +23,9 @@ export class ResultatPage implements OnInit {
     {id_plat:8,nom_plat:'sosis'}
   ];
 
-  constructor(private http: HttpClient, private loadingCtrl: LoadingController, private env: env) { }
+  constructor(private http: HttpClient, private loadingCtrl: LoadingController,
+    // private env: env
+    ) { }
 
   public get recetteFilter(): string{
     return this._recetteFilter;

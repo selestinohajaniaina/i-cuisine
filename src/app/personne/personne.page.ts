@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
-import { env } from 'src/environments/environment';
+// import { env } from 'src/environments/environment';
 
 @Component({
   selector: 'app-personne',
@@ -11,9 +11,14 @@ import { env } from 'src/environments/environment';
 })
 export class PersonnePage implements OnInit {
 
-  private url = this.env.URL_SERVER;
+  private url = 'http://localhost:3000';// this.env.URL_SERVER
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private loadingCtrl: LoadingController, private env: env) { }
+  constructor(
+    private route: ActivatedRoute,
+    private http: HttpClient,
+    private loadingCtrl: LoadingController,
+    // private env: env
+    ) { }
 
   public nbrPerson:number =0;
   public id_recette:number=0;

@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms'
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
-import { env } from 'src/environments/environment';
+// import { env } from 'src/environments/environment';
 
 @Component({
   selector: 'app-signup',
@@ -12,13 +12,15 @@ import { env } from 'src/environments/environment';
 })
 export class SignupPage implements OnInit {
 
-  private url = this.env.URL_SERVER;
+  private url = 'http://localhost:3000';// this.env.URL_SERVER
 
   public data:object = {};
 
   public error='';
 
-  constructor(private http: HttpClient, private router:Router, private loadingCtrl: LoadingController, private env: env) { }
+  constructor(private http: HttpClient, private router:Router, private loadingCtrl: LoadingController,
+    // private env: env
+    ) { }
 
   public showPassword:boolean=true;
   public type:string= 'password';

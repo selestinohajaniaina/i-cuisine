@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
-import { env } from 'src/environments/environment';
+// import { env } from 'src/environments/environment';
 import { IDescription } from './description';
 
 @Component({
@@ -13,7 +13,7 @@ import { IDescription } from './description';
 export class DescriptionPage implements OnInit {
 
   public id_recette:number = 0;
-  private url = this.env.URL_SERVER;
+  private url = 'http://localhost:3000';// this.env.URL_SERVER
   public liste:IDescription = {
     nom_plat:'',
     temps:0,
@@ -26,7 +26,7 @@ export class DescriptionPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private loadingCtrl: LoadingController,
-    private env: env,
+    // private env: env,
     private http: HttpClient
   ) { }
 

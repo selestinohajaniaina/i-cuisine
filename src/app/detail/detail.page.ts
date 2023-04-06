@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { IProduit } from '../produit/produit';
 import { IDetail } from './detail';
-import { env } from 'src/environments/environment';
+// import { env } from 'src/environments/environment';
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 
 @Component({
@@ -14,7 +14,7 @@ import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 })
 export class DetailPage implements OnInit {
 
-  private url = this.env.URL_SERVER;
+  private url = 'http://localhost:3000';// this.env.URL_SERVER
   public nbrPerson:number = 0;
   public qteProduit:number = 0;
   public id_recette:number = 0;
@@ -30,7 +30,7 @@ export class DetailPage implements OnInit {
     private http: HttpClient,
     private alertController: AlertController,
     private loadingCtrl: LoadingController,
-    private env: env,
+    // private env: env,
     private camera: Camera
     ) { }
 
