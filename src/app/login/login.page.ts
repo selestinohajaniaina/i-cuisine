@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms'
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
-// import { env } from 'src/environments/environment';
+import { env } from '../variable';
 
 @Component({
   selector: 'app-login',
@@ -16,10 +16,10 @@ export class LoginPage implements OnInit {
     private http: HttpClient,
     private router: Router,
     private loadingCtrl: LoadingController,
-    // private env: env
+    private env: env
     ) { }
 
-  private url = 'http://localhost:3000';// this.env.URL_SERVER
+  private url = this.env.URL_SERVER; //'http://localhost:3000' 
   public showPassword:boolean=true;
   public type:string= 'password';
   

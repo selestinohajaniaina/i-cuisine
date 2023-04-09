@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { IRecette } from './recette';
-// import { env } from 'src/environments/environment';
+import { env } from '../variable';
 
 @Component({
   selector: 'app-recette',
@@ -11,14 +11,14 @@ import { IRecette } from './recette';
 })
 export class RecettePage implements OnInit {
 
-  private url = 'http://localhost:3000';// this.env.URL_SERVER
+  private url = this.env.URL_SERVER; //'http://localhost:3000' 
   public liste:IRecette[]=[];
 
   public nom_plat:string = '';
   public err:string = '';
 
   constructor(private http: HttpClient, private loadingCtrl: LoadingController,
-    // private env: env
+    private env: env
     ) { }
 
   ngOnInit() {

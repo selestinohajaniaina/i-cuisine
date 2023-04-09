@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { ICategorie } from '../categorie/categorie';
 import { IProduit } from './produit';
-// import { env } from 'src/environments/environment';
+import { env } from '../variable';
 
 @Component({
   selector: 'app-produit',
@@ -13,14 +13,14 @@ import { IProduit } from './produit';
 export class ProduitPage implements OnInit {
 
   public err:string = '';
-  private url = 'http://localhost:3000';// this.env.URL_SERVER
+  private url = this.env.URL_SERVER; //'http://localhost:3000' 
   public libellePro:string = '';
   public unite:string = '';
   public codeCa:string = '';
 
   constructor(private http: HttpClient,
     private alertController: AlertController, private loadingCtrl: LoadingController,
-    // private env: env
+    private env: env
     ) { }
 
   public liste: IProduit[]=[];

@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title size="large" class="ion-text-center">Favorie(s)</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let listeLength of listFavory" routerLink="../description/{{ listeLength.id_plat }}">
+    <ion-card-content>
+      {{ listeLength.nom_plat }} 
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

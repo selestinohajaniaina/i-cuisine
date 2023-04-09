@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
-// import { env } from 'src/environments/environment';
+import { env } from '../variable';
 import { IDescription } from './description';
 
 @Component({
@@ -13,7 +13,7 @@ import { IDescription } from './description';
 export class DescriptionPage implements OnInit {
 
   public id_recette:number = 0;
-  private url = 'http://localhost:3000';// this.env.URL_SERVER
+  private url = this.env.URL_SERVER; //'http://localhost:3000' 
   public liste:IDescription = {
     nom_plat:'',
     temps:0,
@@ -22,17 +22,35 @@ export class DescriptionPage implements OnInit {
     description:'',
     img:null
   };
+  public outline:boolean=false;
+  public name:string = "";
+  private id_user = localStorage.getItem('id_user');
 
   constructor(
     private route: ActivatedRoute,
     private loadingCtrl: LoadingController,
-    // private env: env,
+    private env: env,
     private http: HttpClient
   ) { }
+
+  changeHeart(){
+    this.outline =! this.outline;
+    
+    if(this.name == "heart"){
+      this.deleteFavory();
+    }
+    if(this.name == "heart-outline"){
+      this.insertFavory();
+    }
+
+    
+  }
 
   ngOnInit() {
     this.id_recette = this.route.snapshot.params['id_recette'];
     this.getRecette();
+    console.log(this.id_user);
+    this.ifFavory();
   }
 
   async getRecette(){
@@ -66,6 +84,39 @@ export class DescriptionPage implements OnInit {
       loading.dismiss();
       console.log(this.liste);
     });
+  }
+
+  ifFavory(){
+    this.http.get(`${this.url}/select/favory/${this.id_recette}/${this.id_user}`)
+    .subscribe((resultData: any)=>
+    {
+      console.log(resultData.result.length,' ici le favory');
+      this.name = resultData.result.length > 0 ? "heart" : "heart-outline";
+    });
+  }
+
+  deleteFavory(){
+    this.http.delete(`${this.url}/delete/favory/${this.id_recette}/${this.id_user}`).subscribe((resultData: any)=>
+    {
+        console.log(resultData,"favory Deleted");
+    });
+    this.ifFavory();
+    this.ifFavory();
+  }
+
+  insertFavory(){
+    let bodyData = {
+      id_plat:this.id_recette,
+      id_user:this.id_user,
+      nom_plat:this.liste.nom_plat
+    }
+
+    this.http.post(`${this.url}/insert/favory/`,bodyData).subscribe((resultData: any)=>
+      {
+          console.log(resultData,"isert favory Successfully");
+      });
+      this.ifFavory();
+      this.ifFavory();
   }
 
 

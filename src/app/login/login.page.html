@@ -18,13 +18,13 @@
       <ion-input [type]="type" placeholder="mots de passe" formControlName="password"></ion-input>
     </ion-item>
 
-    <div id="caractere">
-      <ion-checkbox labelPlacement="end" (click)="checked()" name="checkbox"></ion-checkbox>
+    <ion-item>
+      <ion-checkbox labelPlacement="end" (click)="checked()" name="checkbox" slot="start"></ion-checkbox>
       <ion-label for="checkbox">Afficher les caracteres</ion-label>
-    </div>
+    </ion-item>
 
     <ion-button expand="block" shape="round" (click)="connexion()">connexion</ion-button>
-    <span *ngIf="error" class="err">{{ error }}</span>
+    <div *ngIf="error" class="err">{{ error }}</div>
   </form>
 </ion-card>
 
