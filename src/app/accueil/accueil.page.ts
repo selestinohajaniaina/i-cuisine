@@ -5,44 +5,41 @@ import { App } from '@capacitor/app';
 import { AlertController } from '@ionic/angular';
 import { SocialSharing } from '@awesome-cordova-plugins/social-sharing/ngx';
 import { EmailComposer } from '@awesome-cordova-plugins/email-composer/ngx';
-import { env } from 'src/environments/environment';
+import { environment } from 'src/environments/environment';
 
-@Injectable({providedIn: 'any'})
+@Injectable({ providedIn: 'any' })
 @Component({
   selector: 'app-accueil',
   templateUrl: './accueil.page.html',
   styleUrls: ['./accueil.page.scss'],
 })
 export class AccueilPage implements OnInit {
-
-  private url = this.env.URL_SERVER;
-  public username:string= '';
-  public email:string='';
+  private url = environment.URL_SERVER;
+  public username: string = '';
+  public email: string = '';
   public message: string = '';
+  public showSousMenu = false;
 
   constructor(
     private http: HttpClient,
     private router: Router,
     private alertController: AlertController,
     private socialSharing: SocialSharing,
-    private emailComposer: EmailComposer,
-    private env: env
-    ) { }
+    private emailComposer: EmailComposer
+  ) {}
 
   ngOnInit() {
     this.getInfo(localStorage.getItem('id_user'));
-    if(!localStorage.getItem('id_user')){
+    if (!localStorage.getItem('id_user')) {
       this.router.navigate(['../']);
     }
   }
-  
-  public showSousMenu = false;
-  
-  clickBtn(){
-    this.showSousMenu=!this.showSousMenu;
+
+  clickBtn() {
+    this.showSousMenu = !this.showSousMenu;
   }
-  
-  clickMenu(){
+
+  clickMenu() {
     this.getInfo(localStorage.getItem('id_user'));
     console.log('info getting ...');
   }
@@ -65,32 +62,29 @@ export class AccueilPage implements OnInit {
     });
     await alert.present();
     const { role } = await alert.onDidDismiss();
-    if(role=='ok'){
+    if (role == 'ok') {
       //if ok
       localStorage.removeItem('id_user');
       this.router.navigate(['../']);
-  }
-
+    }
   }
 
   //share in social
-
-  sShare(){
+  sShare() {
     this.socialSharing.shareWithOptions({
-      message:'Application de recette pour la Cuisine',
-      subject:'Application android',
-      files:[],
-      url:'',
-      chooserTitle:'CuisineApp'
-    })
+      message: 'Application de recette pour la Cuisine',
+      subject: 'Application android',
+      files: [],
+      url: '',
+      chooserTitle: 'CuisineApp',
+    });
   }
-  
 
   //show alert avant quiter
   async sortir() {
     this.showSousMenu = false;
     const alert = await this.alertController.create({
-      message: 'Etes-vous sur de quiter l\'Application?',
+      message: "Etes-vous sur de quiter l'Application?",
       buttons: [
         {
           text: 'Annuler',
@@ -104,31 +98,25 @@ export class AccueilPage implements OnInit {
     });
     await alert.present();
     const { role } = await alert.onDidDismiss();
-    if(role=='quiter'){
+    if (role == 'quiter') {
       //if ok
-    App.exitApp();
+      App.exitApp();
+    }
   }
 
-  }
-
-  getInfo(id : any){
+  getInfo(id: any) {
     //selection de l'user dans la liste for getting username and email
-    this.http.get(`${this.url}/userId/${id}`)
-    .subscribe((resultData: any)=>
-    {
-          console.log(resultData.data[0]);
-          this.email = resultData.data[0].email;
-          this.username = resultData.data[0].username;
-  });
-}
+    this.http.get(`${this.url}/userId/${id}`).subscribe((resultData: any) => {
+      console.log(resultData.data[0]);
+      this.email = resultData.data[0].email;
+      this.username = resultData.data[0].username;
+    });
+  }
 
-//send message for a bug
-sendEmail(){
-  this.emailComposer.open({
-    to:'seha.karoka@gmail.com'
-  })
-}
-
-
-
+  //send message for a bug
+  sendEmail() {
+    this.emailComposer.open({
+      to: 'seha.karoka@gmail.com',
+    });
+  }
 }

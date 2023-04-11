@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms'
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
-import { env } from 'src/environments/environment';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -11,70 +11,65 @@ import { env } from 'src/environments/environment';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private loadingCtrl: LoadingController
+  ) {}
 
-  constructor(private http: HttpClient, private router: Router, private loadingCtrl: LoadingController, private env: env) { }
+  private url = environment.URL_SERVER;
+  public showPassword: boolean = true;
+  public type: string = 'password';
 
-  private url = this.env.URL_SERVER;
-  public showPassword:boolean=true;
-  public type:string= 'password';
-  
-  public data:object = {};
+  public data: object = {};
 
-  public error='';
+  public error = '';
 
   public userForm = new FormGroup({
     email: new FormControl(''),
-    password: new FormControl('')
+    password: new FormControl(''),
   });
-  connexion(){
-    if(this.userForm.value.email!=''&&this.userForm.value.password!=''){
+  connexion() {
+    if (this.userForm.value.email != '' && this.userForm.value.password != '') {
       this.data = this.userForm.value;
       this.login(this.userForm.value.email);
       this.error = '';
-    }else{
-
-      this.data = {}
-      this.error ='remplir tout les champs.';
-      
+    } else {
+      this.data = {};
+      this.error = 'remplir tout les champs.';
     }
   }
 
-  checked(){
-    this.showPassword =! this.showPassword;
-    this.type = this.showPassword ? 'password': 'text';
+  checked() {
+    this.showPassword = !this.showPassword;
+    this.type = this.showPassword ? 'password' : 'text';
   }
 
-  ngOnInit() {
-    
-  }
+  ngOnInit() {}
 
-  async login(email:any){
+  async login(email: any) {
     const loading = await this.loadingCtrl.create({
-      message:'connexion ...',
+      message: 'connexion ...',
     });
     loading.present();
     //selection de l'user dans la liste for login
-      this.http.get(`${this.url}/user/${email}`)
-      .subscribe((resultData: any)=>
-      {
-        if(resultData.status==true&&resultData.data.length>0){
-          if(resultData.data[0].password == this.userForm.value.password){
-            console.log(resultData.data[0]);
-            this.data = resultData.data[0];
-            localStorage.setItem('id_user',resultData.data[0].id_user);
-            this.userForm.value.password='';
-            this.userForm.value.email='';
-            loading.dismiss();
-            this.router.navigate(['../accueil']);
-          }else{
-            loading.dismiss();
-            this.error = 'mots de passe incorrect, veillez ressayer!';
-          }
-        }else{
-          this.error = 'compte introuvable';
+    this.http.get(`${this.url}/user/${email}`).subscribe((resultData: any) => {
+      if (resultData.status == true && resultData.data.length > 0) {
+        if (resultData.data[0].password == this.userForm.value.password) {
+          console.log(resultData.data[0]);
+          this.data = resultData.data[0];
+          localStorage.setItem('id_user', resultData.data[0].id_user);
+          this.userForm.value.password = '';
+          this.userForm.value.email = '';
+          loading.dismiss();
+          this.router.navigate(['../accueil']);
+        } else {
+          loading.dismiss();
+          this.error = 'mots de passe incorrect, veillez ressayer!';
         }
-      });
-    }
-
-
+      } else {
+        this.error = 'compte introuvable';
+      }
+    });
+  }
 }
