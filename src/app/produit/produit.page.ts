@@ -94,24 +94,24 @@ export class ProduitPage implements OnInit {
     });
   }
 
-  //show alert avant suprimer
+  //show alert avant Supprimer
   async presentAlert(id:number) {
     const alert = await this.alertController.create({
-      message: 'voullez-vous vraiment la suprimer?',
+      message: 'voullez-vous vraiment la Supprimer?',
       buttons: [
         {
           text: 'Annuler',
           role: 'Annuler',
         },
         {
-          text: 'Suprimer',
-          role: 'Suprimer',
+          text: 'Supprimer',
+          role: 'Supprimer',
         },
       ],
     });
     await alert.present();
     const { role } = await alert.onDidDismiss();
-    if(role=='Suprimer'){
+    if(role=='Supprimer'){
       this.http.delete(`${this.url}/delete/produit/`+ id).subscribe((resultData: any)=>
     {
         console.log(resultData,"produit Deleted");

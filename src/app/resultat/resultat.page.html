@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title size="large" class="ion-text-center">Notes</ion-title>
+    <ion-title size="large" class="ion-text-center">Recette partagé</ion-title>
   </ion-toolbar>
   <ion-toolbar color="primary">
     <ion-searchbar color="primary" [(ngModel)]="recetteFilter"></ion-searchbar>
@@ -13,7 +13,7 @@
 <ion-content>
 
   <ion-card *ngFor="let listeLength of filteredRecette" routerLink="../description/{{ listeLength.id_plat }}">
-    <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+    <img src="assets/card-media.png" />
     <ion-card-header>
       <ion-card-title>{{ listeLength.nom_plat }}</ion-card-title>
     </ion-card-header>

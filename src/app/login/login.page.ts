@@ -76,6 +76,7 @@ export class LoginPage implements OnInit {
             this.error = 'mots de passe incorrect, veillez ressayer!';
           }
         }else{
+          loading.dismiss();
           this.error = 'compte introuvable';
         }
       });

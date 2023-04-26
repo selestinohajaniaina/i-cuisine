@@ -66,22 +66,22 @@ export class CategoriePage implements OnInit {
   
   async presentAlert(id:number) {
     const alert = await this.alertController.create({
-      message: 'voullez-vous la suprimer?',
-      subHeader: 'Vous risquez de prerdre des données!',
+      message: 'voullez-vous la Supprimer?',
+      subHeader: 'Vous risquez de perdre des données!',
       buttons: [
         {
           text: 'Annuler',
           role: 'Annuler',
         },
         {
-          text: 'Suprimer',
-          role: 'Suprimer',
+          text: 'Supprimer',
+          role: 'Supprimer',
         },
       ],
     });
     await alert.present();
     const { role } = await alert.onDidDismiss();
-    if(role=='Suprimer'){
+    if(role=='Supprimer'){
       this.http.delete(`${this.url}/delete/categorie/`+ id).subscribe((resultData: any)=>
       {
           console.log(resultData,"Categorie Deleted");
