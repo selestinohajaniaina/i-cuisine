@@ -24,6 +24,8 @@ export class DetailPage implements OnInit {
   public liste:IDetail[]=[];
   public listePro:IProduit[]=[];
   public produit:string = '';
+  public image:string = 'assets/card-media.png';
+  public description_recette:string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -46,6 +48,7 @@ export class DetailPage implements OnInit {
     this.getPlat();
     this.getAllProduit();
     this.getProduit();
+    this.description_();
   }
 
   //get plat where id=id_recette
@@ -162,9 +165,49 @@ export class DetailPage implements OnInit {
      // If it's base64 (DATA_URL):
      let base64Image = 'data:image/jpeg;base64,' + imageData;
      console.log('succes',base64Image);
+     this.image = imageData;
     }, (err) => {
      // Handle error
      console.log('error');
+    });
+  }
+
+  choosePhoto(){
+    const optionsGallery: CameraOptions = {
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      quality: 100,
+      allowEdit: true,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+    
+    this.camera.getPicture(optionsGallery).then((imageData) => {
+     // imageData is either a base64 encoded string or a file URI
+     // If it's base64 (DATA_URL):
+     let base64Image = 'data:image/jpeg;base64,' + imageData;
+     console.log('succes',base64Image);
+     this.image = imageData;
+    }, (err) => {
+     // Handle error
+     console.log('error');
+    });
+  }
+
+  //mangala description-ny recette any @db
+  description_(){
+    //description
+    this.http.get(`${this.url}/description/${this.id_recette}`)
+    .subscribe((resultData: any)=>
+    {
+      console.log(resultData.result[0]);
+      if(resultData.result[0]){
+        this.image = resultData.result[0].img?resultData.result[0].img:'./assets/card-media.png';
+        this.description_recette= resultData.result[0].description?resultData.result[0].description:'(No description)';
+      }else{
+        this.image = './assets/card-media.png';
+        this.description_recette = '(No description)';
+      }
     });
   }
 

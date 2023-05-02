@@ -69,6 +69,7 @@
     "cordova-plugin-ionic-webview": "^5.0.0",
     "cordova-plugin-splashscreen": "5.0.2",
     "cordova-plugin-statusbar": "^2.4.2",
+    "es6-promise-plugin": "^4.2.2",
     "eslint": "^7.6.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jsdoc": "30.7.6",
@@ -94,7 +95,9 @@
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-camera": {
         "ANDROIDX_CORE_VERSION": "1.6.+"
-      }
+      },
+      "cordova-plugin-x-socialsharing": {},
+      "cordova-plugin-email-composer": {}
     },
     "platforms": [
       "android"

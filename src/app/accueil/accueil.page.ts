@@ -78,14 +78,13 @@ export class AccueilPage implements OnInit {
   //share in social
 
   sShare(){
+    let options = {
+      message: 'Application de recette cuisine',
+      subject: 'application android',
+      url: 'https://github.com/selestinohajaniaina'
+    }
     // Share via email
-    this.socialSharing.shareViaEmail('Body', 'Subject', ['recipient@example.org']).then((e) => {
-    // Success!
-    console.log('succes in share',e);
-    }).catch((e) => {
-    // Error!
-    console.log('error in share',e);
-    });
+    this.socialSharing.shareWithOptions(options);
   }
   
 
@@ -128,7 +127,9 @@ export class AccueilPage implements OnInit {
 //send message for a bug
 sendEmail(){
   this.emailComposer.open({
-    to:'seha.karoka@gmail.com'
+    to:'seha.karoka@gmail.com',
+    subject:'this is a bug of your app',
+    body:'the bugs of this app are: *'
   })
 }
 
