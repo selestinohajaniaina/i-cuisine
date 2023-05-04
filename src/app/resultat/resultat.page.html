@@ -13,7 +13,7 @@
 <ion-content>
 
   <ion-card *ngFor="let listeLength of filteredRecette" routerLink="../description/{{ listeLength.id_plat }}">
-    <img src="assets/card-media.png" />
+    <img [src]="getImg(listeLength.id_plat)" />
     <ion-card-header>
       <ion-card-title>{{ listeLength.nom_plat }}</ion-card-title>
     </ion-card-header>

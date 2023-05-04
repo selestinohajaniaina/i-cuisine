@@ -166,6 +166,7 @@ export class DetailPage implements OnInit {
      let base64Image = 'data:image/jpeg;base64,' + imageData;
      console.log('succes',base64Image);
      this.image = imageData;
+     this.uploadFile(imageData);
     }, (err) => {
      // Handle error
      console.log('error');
@@ -188,6 +189,7 @@ export class DetailPage implements OnInit {
      let base64Image = 'data:image/jpeg;base64,' + imageData;
      console.log('succes',base64Image);
      this.image = imageData;
+     this.uploadFile(imageData);
     }, (err) => {
      // Handle error
      console.log('error');
@@ -202,12 +204,22 @@ export class DetailPage implements OnInit {
     {
       console.log(resultData.result[0]);
       if(resultData.result[0]){
-        this.image = resultData.result[0].img?resultData.result[0].img:'./assets/card-media.png';
+        this.image = resultData.result[0].img?this.url+'/'+resultData.result[0].img:'./assets/card-media.png';
         this.description_recette= resultData.result[0].description?resultData.result[0].description:'(No description)';
       }else{
         this.image = './assets/card-media.png';
         this.description_recette = '(No description)';
       }
+    });
+  }
+
+  async uploadFile(file: File) {
+    const formData = new FormData();
+    formData.append('file', file);
+  
+    const response = await this.http.post(this.url+'/upload-file', formData).subscribe((resultData: any)=>
+    {
+        console.log(resultData);
     });
   }
 

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { IDetailRecette } from './resultat';
+import { IDescRecette, IDetailRecette } from './resultat';
 import { LoadingController } from '@ionic/angular';
 import { env } from '../variable';
 
@@ -15,6 +15,7 @@ export class ResultatPage implements OnInit {
   private _recetteFilter: string = '';
   public filteredRecette:IDetailRecette[] = [];
   public liste:IDetailRecette[] = [];
+  public listImg:IDescRecette[]=[];
 
   public data:{
     id_plat:number,
@@ -46,6 +47,7 @@ private filterHotels(criteria:string):IDetailRecette[] {
 
   ngOnInit() {
     this.getAllRecette();
+    this.getDescr();
   }
   
   //selection de tout les plat (recette) enregistré
@@ -64,6 +66,22 @@ private filterHotels(criteria:string):IDetailRecette[] {
       console.log(this.liste);
     this.filteredRecette = this.liste;
     });
+  }
+
+  //selection de tout les description du plat (recette) enregistré
+  async getDescr(){
+
+    this.http.get(`${this.url}/select/description`)
+    .subscribe((resultData: any)=>
+    {
+      this.listImg = resultData.result ;
+      console.log(this.listImg);
+    console.log("hello " , this.getImg(10));
+    });
+  }
+
+  getImg(id:number){
+    return this.url+"/"+this.listImg.find(item => item.id_plat == id)?.img;
   }
 
   getNom(id:number){
