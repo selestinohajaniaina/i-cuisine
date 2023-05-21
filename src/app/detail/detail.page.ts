@@ -186,10 +186,11 @@ export class DetailPage implements OnInit {
     this.camera.getPicture(optionsGallery).then((imageData) => {
      // imageData is either a base64 encoded string or a file URI
      // If it's base64 (DATA_URL):
-     let base64Image = 'data:image/jpeg;base64,' + imageData;
-     console.log('succes',base64Image);
+    //  let base64Image = 'data:image/jpeg;base64,' + imageData;
+    //  console.log('succes',base64Image);
      this.image = imageData;
      this.uploadFile(imageData);
+     console.log(imageData);
     }, (err) => {
      // Handle error
      console.log('error');
