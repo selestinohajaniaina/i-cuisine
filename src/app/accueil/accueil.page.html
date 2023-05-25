@@ -1,14 +1,3 @@
-<ion-header>
-  <ion-toolbar color="primary">
-
-    <ion-buttons slot="start" (click)="clickMenu()">
-      <ion-menu-button menuId="menu-main" class="menu"></ion-menu-button>
-    </ion-buttons>
-    <ion-title size="large" class="ion-text-center">Accueil</ion-title>
-    
-  </ion-toolbar>
-</ion-header>
-
 <ion-menu menuId="menu-main" contentId="main">
   <ion-header color="light">
 
@@ -69,8 +58,21 @@
     </div>
   </ion-content>
 </ion-menu>
+
+
+<ion-header>
+  <ion-toolbar color="primary"  id="main">
+
+    <ion-buttons slot="start" (click)="clickMenu()">
+      <ion-menu-button menuId="menu-main" class="menu"></ion-menu-button>
+    </ion-buttons>
+    <ion-title size="large" class="ion-text-center">Accueil</ion-title>
+    
+  </ion-toolbar>
+</ion-header>
+
  
-<ion-content id="main" color="light">
+<ion-content color="light">
 
   <ion-card routerLink="../categorie">
     <ion-img src="assets/cat.jpg" />

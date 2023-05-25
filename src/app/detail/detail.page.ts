@@ -163,10 +163,8 @@ export class DetailPage implements OnInit {
     this.camera.getPicture(options).then((imageData) => {
      // imageData is either a base64 encoded string or a file URI
      // If it's base64 (DATA_URL):
-     let base64Image = 'data:image/jpeg;base64,' + imageData;
-     console.log('succes',base64Image);
      this.image = imageData;
-     this.uploadFile(imageData);
+    //  this.uploadFile(imageData);
     }, (err) => {
      // Handle error
      console.log('error');
@@ -188,8 +186,8 @@ export class DetailPage implements OnInit {
      // If it's base64 (DATA_URL):
     //  let base64Image = 'data:image/jpeg;base64,' + imageData;
     //  console.log('succes',base64Image);
-     this.image = imageData;
-     this.uploadFile(imageData);
+     
+     this.convertImageToBase64(imageData);
      console.log(imageData);
     }, (err) => {
      // Handle error
@@ -222,6 +220,20 @@ export class DetailPage implements OnInit {
     {
         console.log(resultData);
     });
+  }
+
+  convertImageToBase64(event: any): void {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+  
+    reader.onloadend = () => {
+      const base64String = reader.result as string;
+      // Use the base64String as needed (e.g., send it to an API, display it, etc.)
+      console.log("ici ",base64String);
+      this.image = base64String;
+    };
+  
+    reader.readAsDataURL(file);
   }
 
 }
