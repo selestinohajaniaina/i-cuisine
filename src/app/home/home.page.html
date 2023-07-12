@@ -1,15 +1,31 @@
-<ion-header id="header">
-
-    <div id="title">
-      <ion-title >Accueil</ion-title>
-    </div>
-
+<ion-header>
+  <ion-toolbar  color="danger">
+    <ion-title>First Config</ion-title>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div id="contener">
-    <img src="assets/cuisine.jpg" width="250px" class="logo" alt="cuisine">
-    <ion-button class="actionBtn" routerLink="../login">Login</ion-button>
-    <ion-button class="actionBtn" routerLink="../signup">Sign up</ion-button>
-  </div>
+  <ion-card>
+      <ion-img src="assets/cuisine.jpg"></ion-img>
+    <ion-card-content>
+      <ion-card-subtitle>Cuisine App</ion-card-subtitle>
+      <ion-card-title>My App Cuisine</ion-card-title>
+      Bienvenus dans notre nouveau application mobile! 
+      C'est un application pour faciliter notre vie,
+      enregistrer votre merveilleux recette pour le trouver
+      facilement a la prochaine cuisson.
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      Vous pouvez securiser votre propre recette,
+      en utilisant une mots de passe forte, ou cliquez sur "Ignorer"
+      pour depasser la configuration. Cliquez sur "Nouveau mots de passe"
+      pour commencer.
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button expand="block" (click)="presentAlert()">Nouveau mots de passe</ion-button>
+      <ion-button color="medium" expand="block" (click)="skip()">Ignorer</ion-button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

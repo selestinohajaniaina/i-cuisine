@@ -13,9 +13,7 @@ export class ParametrePage implements OnInit {
 
   public showPassword:boolean=true;
   public type:string= 'password';
-  public username: string = '';
-  public email: string = '';
-  public password: string = '';
+  public password: string | null = '';
   public error: string = '';
   public data:{}={};
   public id_user: number = 0;
@@ -24,8 +22,7 @@ export class ParametrePage implements OnInit {
   constructor(private http: HttpClient, private loadingCtrl: LoadingController, private router: Router, private env: env) { }
 
   ngOnInit() {
-    // this.id_user = localStorage.getItem('id_user');
-    this.getInfo();
+    this.password = localStorage.getItem('password');
   }
 
   checked(){
@@ -39,51 +36,36 @@ export class ParametrePage implements OnInit {
       message:'Recuperation des informations ...',
     });
     loading.present();
-
-    //selection de l'user dans la liste for getting username and email
-    this.http.get(`${this.url}/userId/${localStorage.getItem('id_user')}`)
-    .subscribe((resultData: any)=>
-    {
-          console.log(resultData.data[0]);
-          this.email = resultData.data[0].email;
-          this.username = resultData.data[0].username;
-          this.password = resultData.data[0].password;
-          loading.dismiss();
-  });
+    loading.dismiss();
 }
 
 //upDate Profil
 
 async upDate(){
-  if(this.email!=''&&this.username!=''&&this.password!=''){
+  // if(this.email!=''&&this.username!=''&&this.password!=''){
       
-      //si vrai les infos
-      this.error ='';
-      this.data = {
-        email:this.email,
-        username:this.username,
-        password:this.password
-      };
-      console.log(this.data);
+  //     //si vrai les infos
+  //     this.error ='';
+  //     this.data = {
+  //       email:this.email,
+  //       username:this.username,
+  //       password:this.password
+  //     };
+  //     console.log(this.data);
 
-      const loading = await this.loadingCtrl.create({
-        message:'Modification, patientez ...',
-      });
-      loading.present();
+  //     const loading = await this.loadingCtrl.create({
+  //       message:'Modification, patientez ...',
+  //     });
+  //     loading.present();
+  //   loading.dismiss();
+  //   this.router.navigate(['../accueil']);
 
-      this.http.put(`${this.url}/update/${localStorage.getItem('id_user')}`,this.data).subscribe((resultData: any)=>
-    {
-      console.log(resultData);
-      loading.dismiss();
-    });
-    this.router.navigate(['../accueil']);
+  // }else{
 
-  }else{
-
-    this.data = {}
-    this.error ='remplir tout les champs.';
+  //   this.data = {}
+  //   this.error ='remplir tout les champs.';
     
-  }
+  // }
 }
 
 

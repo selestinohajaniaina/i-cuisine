@@ -1,77 +1,91 @@
-<ion-header id="header">
-
-  <div>
-    <ion-buttons slot="start" (click)="clickMenu()">
-      <ion-menu-button menuId="menu-main" class="menu"></ion-menu-button>
-    </ion-buttons>
-  </div>
-
-    <div id="title">
-      <ion-title >Accueil</ion-title>
-    </div>
-
-</ion-header>
- 
-<ion-content id="main">
-  <div class="contener">
-
-    <div class="fit">
-
-      <div class="group" routerLink="../categorie">
-        <div><img src="assets/cat.jpg"></div>
-        <div class="label">Categorie</div>
-      </div>
-  
-      <div class="group" routerLink="../produit">
-        <div><img src="assets/pro.jpg"></div>
-        <div class="label">Produit</div>
-      </div>
-  
-      <div class="group" routerLink="../recette">
-        <div><img src="assets/pla.jpg"></div>
-        <div class="label">Recette</div>
-      </div>
-  
-      <div class="group" routerLink="../resultat">
-        <div><img src="assets/res.jpg"></div>
-        <div class="label">Notes</div>
-      </div>
-
-    </div>
-
-  </div>
-</ion-content>
-
 <ion-menu menuId="menu-main" contentId="main">
+  <ion-header>
+    <ion-toolbar color="danger">
+      <ion-title>Menu</ion-title>
+      <ion-img src="assets/icon.png" slot="start"></ion-img>
+    </ion-toolbar>
+  </ion-header>
   <ion-content>
-    <div class="contener_menu">
-
-      <div class="menu-header-bg"></div>
-
-      <div class="profil">
-        <div class="image">{{ username[0] }}</div>
-        <div class="name">{{ username }}</div>
-      </div>
-
-      <div class="espace"></div>
-
-
-        <div class="menu-list">
-          <!-- <div class="item"><ion-icon name="globe-outline"></ion-icon>&nbsp; Termes & Condition</div> -->
-          <div class="item" routerLink="../parametre"><ion-icon name="settings-outline"></ion-icon>&nbsp; Parametre</div>
-          <!-- <div class="item"><ion-icon name="bag-add-outline"></ion-icon>&nbsp; Decouvrir</div> -->
-          <div class="item" (click)="sShare()"><ion-icon name="share-social-outline"></ion-icon>&nbsp; Partage</div>
-          <div class="item"><ion-icon name="bug-outline" (click)="sendEmail()"></ion-icon>&nbsp; Signalé un bug</div>
-          <div class="item" routerLink="../apropos"><ion-icon name="information-circle-outline"></ion-icon>&nbsp; Apropos</div>
-        </div>
-        <div class="menu-bottom">
-          <div class="sous-menu" *ngIf="showSousMenu">
-            <div (click)="logout()"><ion-icon name="exit-outline"></ion-icon>&nbsp;Deconnection</div>
-            <div class="div2" (click)="sortir()"><ion-icon name="add-circle-outline"></ion-icon>&nbsp;Sortir</div>
-          </div>
-          <div class="item">{{ email }}</div>
-          <ion-icon name="ellipsis-vertical-sharp" (click)="clickBtn()"></ion-icon>
-        </div>
-    </div>
+    <ion-list>
+      <ion-item>
+        <ion-label>Verouiller l'application</ion-label>
+        <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+      </ion-item>
+      <ion-item routerLink="../parametre">
+        <ion-label>Parametre</ion-label>
+        <ion-icon name="settings-outline" slot="start"></ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-label>Signaler un bug</ion-label>
+        <ion-icon name="bug-outline" slot="start" (click)="sendEmail()"></ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-label>Partager</ion-label>
+        <ion-icon name="share-social-outline" slot="start" (click)="sendEmail()"></ion-icon>
+      </ion-item>
+      <ion-item routerLink="../apropos">
+        <ion-label>Apropos</ion-label>
+        <ion-icon name="information-circle-outline" slot="start"></ion-icon>
+      </ion-item>
+    </ion-list>
   </ion-content>
 </ion-menu>
+
+<ion-header id="main">
+  <ion-toolbar color="danger">
+    <ion-buttons slot="start">
+      <ion-menu-button id="menu-main"></ion-menu-button>
+    </ion-buttons>
+    <ion-title >Accueil</ion-title>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content>
+
+<ion-card routerLink="../categorie">
+  <ion-img src="assets/cat.jpg"></ion-img>
+  <ion-card-content>
+    <ion-card-title>Categorie</ion-card-title>
+    Decouvrer les categories alimentaires, partagez vers nous
+    les nouveaux groupe d'aliment dans votre region!😍
+  </ion-card-content>
+</ion-card>
+
+<ion-card routerLink="../produit">
+  <ion-img src="assets/pro.jpg"></ion-img>
+  <ion-card-content>
+    <ion-card-title>Produit</ion-card-title>
+    Rechercher ici les bons engredients pour la recette,
+    n'oublie pas de nous donnez votre decouvert d'aliment.😋
+  </ion-card-content>
+</ion-card>
+
+<ion-card routerLink="../recette">
+  <ion-img src="assets/pla.jpg"></ion-img>
+  <ion-card-content>
+    <ion-card-title>Recette</ion-card-title>
+    Montrez a nous votre talent de cuisine en construsant ici
+    votre propre recette.🤗
+  </ion-card-content>
+</ion-card>
+
+<ion-card routerLink="../resultat">
+  <ion-img src="assets/res.jpg"></ion-img>
+  <ion-card-content>
+    <ion-card-title>Notes</ion-card-title>
+    N'oublie pas de donner une notes (⭐) a la recette pour defier
+    votre camarade, montre-lui votre talent.🥰
+  </ion-card-content>
+</ion-card>
+
+<ion-card routerLink="">
+  <ion-img src="assets/pla.jpg"></ion-img>
+  <ion-card-content>
+    <ion-card-title>Recette partagé</ion-card-title>
+    Decouvrer les recettes en ligne pour s'inspirer beaucoup,
+    Essayer de publier aussi votre propre recette, si vous envie
+    de gagner d'argent quand les gens s'interressent.🤑
+  </ion-card-content>
+</ion-card>
+
+</ion-content>

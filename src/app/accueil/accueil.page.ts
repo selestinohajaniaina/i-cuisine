@@ -30,10 +30,10 @@ export class AccueilPage implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.getInfo(localStorage.getItem('id_user'));
-    if(!localStorage.getItem('id_user')){
-      this.router.navigate(['../']);
-    }
+    // this.getInfo(localStorage.getItem('id_user'));
+    // if(!localStorage.getItem('id_user')){
+    //   this.router.navigate(['../']);
+    // }
   }
   
   public showSousMenu = false;

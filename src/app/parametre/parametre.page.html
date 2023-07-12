@@ -1,32 +1,37 @@
-<ion-header id="header">
-
-  <div class="back">
-    <ion-back-button id="back"></ion-back-button>
-  </div>
-
-    <div id="title">
-      <ion-title >Parametre</ion-title>
-    </div>
-
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-back-button slot="start"></ion-back-button>
+    <ion-title >Parametre</ion-title>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <div class="content">
-    
-    <input type="text" [(ngModel)]="username" placeholder="Username">
-    <input type="email" [(ngModel)]="email" placeholder="Email">
-    <input [type]="type" [(ngModel)]="password" placeholder="Mots de passe">
-    <div id="caractere">
-      <input type="checkbox" (click)="checked()" name="car" id="car" >&nbsp;
-      <label for="car">Afficher les caracteres</label>
-    </div>
-    <div class="button">
+  
+  <ion-list>
+      Modification du code de verouillage:
+      <ion-item>
+        <ion-input [type]="type" [(ngModel)]="password" placeholder="Mots de passe"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Afficher les caracteres</ion-label>
+        <ion-input type="checkbox" (click)="checked()" slot="start"></ion-input>
+      </ion-item>
       <ion-button (click)="upDate()">Modifier</ion-button>
-      <ion-button routerLink="../accueil">Annuler</ion-button>
-      <div *ngIf="error" class="err">{{ error }}</div>
-    </div>
-    
-  </div>
+      <ion-button routerLink="../accueil" color="medium">Annuler</ion-button>
+    </ion-list>
+
+    <ion-list>
+      <ion-item>
+        Mode sombre
+      </ion-item>
+      <ion-item>
+        Langue
+      </ion-item>
+      <ion-item>
+        Mode de supression du code de verouillage
+      </ion-item>
+    </ion-list>
+  
   
 </ion-content>
