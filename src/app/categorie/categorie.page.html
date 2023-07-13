@@ -1,27 +1,33 @@
-<ion-header id="header">
-
-  <div class="back">
-    <ion-back-button id="back"></ion-back-button>
-  </div>
-
-    <div id="title">
-      <ion-title >Categorie</ion-title>
-    </div>
-
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-back-button slot="start"></ion-back-button>
+    <ion-title >Categorie</ion-title>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
+  <ion-card>
+    <ion-list>
+      <ion-item>
+        <ion-input type="text" [(ngModel)]="categorieCode" placeholder="code"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" [(ngModel)]="categorieName" placeholder="Libelle"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="err">
+        <ion-label color="danger">{{ err }}</ion-label>
+      </ion-item>
+      <ion-button (click)="insert()" expand="block">
+        <ion-icon name="add-outline" slot="start"></ion-icon>
+        Ajouter
+      </ion-button>
+    </ion-list>
+  </ion-card>
+
   <div class="content">
-      <div class="form">
-        <input type="text" [(ngModel)]="categorieCode" placeholder="code">
-        <input type="text" [(ngModel)]="categorieName" placeholder="Libelle">
-      <button (click)="btnAjout()">
-        <span class="material-icons">control_point</span>
-      </button>
-    </div>
-    <span *ngIf="err" class="err">{{ err }}</span>
-    <table border="1">
+    
+    <!-- <table border="1">
       <tr id="head">
         <td>code</td>
         <td>Libelle</td>
@@ -33,7 +39,7 @@
             <span class="material-icons">delete</span>
           </td>
         </tr>
-    </table>
+    </table> -->
   </div>
   
 </ion-content>

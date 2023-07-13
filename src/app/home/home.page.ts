@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { Browser } from '@capacitor/browser';
 import { AlertController, LoadingController } from '@ionic/angular';
+import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx'
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,9 @@ import { AlertController, LoadingController } from '@ionic/angular';
 })
 export class HomePage  implements OnInit{
 
-  constructor(private router: Router, private alertController: AlertController) {}
+  private db:SQLiteObject;
+
+  constructor(private router: Router, private alertController: AlertController, private sqlite: SQLite) {}
 
   ngOnInit(): void {
     if(localStorage.getItem('connected') == 'true' ) {
@@ -19,43 +22,20 @@ export class HomePage  implements OnInit{
     }
   }
 
-  skip() {
-    localStorage.setItem("connected",'true');
+  begin() {
+    localStorage.setItem('connected','true');
     this.router.navigate(['../accueil']);
+    this.creatDB();
   }
 
-  async presentAlert() {
-    const alert = await this.alertController.create({
-      message: 'Entrer une mots de passe facile a retenir pour votre recette:',
-      inputs: [
-        {
-          name: 'password',
-          type: 'text',
-          placeholder: 'Entrez votre texte ici'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Annuler',
-          role: 'annuler',
-        },
-        {
-          text: 'Valider',
-          role: 'valider',
-        },
-      ],
-    });
-    await alert.present();
-    const { role, data } = await alert.onDidDismiss();
-    if(role=='valider'){
-      if(data.values.password){
-        console.log(data);
-        localStorage.setItem("password",data.values.password);
-        localStorage.setItem("connected",'true');
-        this.router.navigate(['../accueil']);
-      }
-    }
-
+  creatDB() {
+    this.sqlite.create({
+      name: 'cuisine.db',
+      location: 'default'
+    }).then((res:SQLiteObject)=>{
+      this.db = res;
+      console.log('db created');
+    })
   }
 
 }  

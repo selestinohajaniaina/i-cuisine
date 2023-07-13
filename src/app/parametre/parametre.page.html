@@ -7,30 +7,25 @@
 
 <ion-content>
 
-  
-  <ion-list>
-      Modification du code de verouillage:
-      <ion-item>
-        <ion-input [type]="type" [(ngModel)]="password" placeholder="Mots de passe"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Afficher les caracteres</ion-label>
-        <ion-input type="checkbox" (click)="checked()" slot="start"></ion-input>
-      </ion-item>
-      <ion-button (click)="upDate()">Modifier</ion-button>
-      <ion-button routerLink="../accueil" color="medium">Annuler</ion-button>
-    </ion-list>
-
     <ion-list>
       <ion-item>
         Mode sombre
+        <ion-toggle [checked]="false" slot="end">
+        </ion-toggle>
       </ion-item>
       <ion-item>
         Langue
+        <ion-select label="label" slot="end" value="Francais">
+          <ion-select-option value="Allemand">❤ &nbsp; Allemand</ion-select-option>
+          <ion-select-option value="Anglais">❤ &nbsp; Anglais</ion-select-option>
+          <ion-select-option value="Espagne">❤ &nbsp; Espagne</ion-select-option>
+          <ion-select-option value="Francais">❤ &nbsp; Francais</ion-select-option>
+          <ion-select-option value="Italien">❤ &nbsp; Italien</ion-select-option>
+          <ion-select-option value="Malagasy">❤ &nbsp; Malagasy</ion-select-option>
+        </ion-select>
       </ion-item>
-      <ion-item>
-        Mode de supression du code de verouillage
-      </ion-item>
+      <ion-button expand="block">Modifier</ion-button>
+      <ion-button routerLink="../accueil" expand="block" color="medium">Annuler</ion-button>
     </ion-list>
   
   

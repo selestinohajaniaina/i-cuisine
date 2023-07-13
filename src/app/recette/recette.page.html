@@ -11,30 +11,4 @@
 </ion-header>
 
 <ion-content>
-  <div class="content">
-
-    <div class="p">Ajouter votre nouveau recette</div>
-
-      <div class="form">
-        <input type="text" [(ngModel)]="nom_plat" placeholder="nom du recette">
-        <button (click)="btnAjout()">
-          <span class="material-icons">control_point</span>
-        </button>
-      </div>
-
-    <span *ngIf="err" class="err">{{ err }}</span>
-
-    <div class="p">Ou choisir dans cette liste:</div>
-    
-      <div class="listeRecContent">
-        <div *ngFor="let listeRecetteLength of liste" class="listeRec" routerLink="../personne/{{listeRecetteLength.id_plat}}">
-          <!-- <td>{{ listeRecetteLength.id_plat }}</td> -->
-          {{ listeRecetteLength.nom_plat }}
-          <!-- <td (click)="btnSup(listeLength.cat_id)">
-            <span class="material-icons">delete</span>
-          </td> -->
-        </div>
-      </div>
-
-  </div>
 </ion-content>

@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
-import { env } from 'src/environments/environment';
 
 @Component({
   selector: 'app-personne',
@@ -11,9 +10,7 @@ import { env } from 'src/environments/environment';
 })
 export class PersonnePage implements OnInit {
 
-  private url = this.env.URL_SERVER;
-
-  constructor(private route: ActivatedRoute, private http: HttpClient, private loadingCtrl: LoadingController, private env: env) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient, private loadingCtrl: LoadingController) { }
 
   public nbrPerson:number =0;
   public id_recette:number=0;
@@ -39,51 +36,7 @@ export class PersonnePage implements OnInit {
 
   ngOnInit() {
     this.id_recette = this.route.snapshot.params['id_plat'];
-    this.getPlat();
   }
 
-  //get plat where id=id_recette
-  getPlat(){
-    this.http.get(`${this.url}/select/plat/${this.id_recette}`)
-    .subscribe((resultData: any)=>
-    {
-      this.nom_plat = resultData.result[0].nom_plat;
-      console.log(this.nom_plat);
-    });
-  }
-
-  btnSend(){
-    if(this.rating!=0&&this.minute>0&&this.dificulte!=''){
-      this.data = {
-        id_plat:this.id_recette,
-        min: this.minute,
-        dificulte:this.dificulte,
-        rating:this.rating,
-        nom_plat:this.nom_plat
-      }
-      this.sendFeedback(this.data);
-      this.rating  =0;
-      this.minute= 0;
-      this.dificulte = '';
-    }else{
-      this.error = 'Champs vide non valide!';
-    }
-  }
-
-  async sendFeedback(bodyData:{}){
-
-    const loading = await this.loadingCtrl.create({
-      message:'Chargement ...',
-    });
-    loading.present();
-    
-    //add new user
-    this.http.post(`${this.url}/insert/feedback`,bodyData).subscribe((resultData: any)=>
-      {
-          console.log(resultData,"signup Successfully");
-          loading.dismiss();
-          this.msg = "Merci de votre note!";
-      });
-  }
 
 }

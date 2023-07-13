@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoadingController } from '@ionic/angular';
-import { env } from 'src/environments/environment';
+import { AlertController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-parametre',
@@ -17,9 +16,8 @@ export class ParametrePage implements OnInit {
   public error: string = '';
   public data:{}={};
   public id_user: number = 0;
-  private url = this.env.URL_SERVER;
 
-  constructor(private http: HttpClient, private loadingCtrl: LoadingController, private router: Router, private env: env) { }
+  constructor(private http: HttpClient, private loadingCtrl: LoadingController, private router: Router, private alertController: AlertController) { }
 
   ngOnInit() {
     this.password = localStorage.getItem('password');
@@ -39,33 +37,27 @@ export class ParametrePage implements OnInit {
     loading.dismiss();
 }
 
-//upDate Profil
 
-async upDate(){
-  // if(this.email!=''&&this.username!=''&&this.password!=''){
-      
-  //     //si vrai les infos
-  //     this.error ='';
-  //     this.data = {
-  //       email:this.email,
-  //       username:this.username,
-  //       password:this.password
-  //     };
-  //     console.log(this.data);
-
-  //     const loading = await this.loadingCtrl.create({
-  //       message:'Modification, patientez ...',
-  //     });
-  //     loading.present();
-  //   loading.dismiss();
-  //   this.router.navigate(['../accueil']);
-
-  // }else{
-
-  //   this.data = {}
-  //   this.error ='remplir tout les champs.';
+async presentAlert() {
+  const alert = await this.alertController.create({
+    message: "Vous risquez de suprimer deffinitivement le mots de verouillage, et l'application sera mettre en mode initial. Nous garderons vos donnés personnel, voulez-vous vraiment continuer ?",
+    buttons: [
+      {
+        text: 'Annuler',
+        role: 'annuler',
+      },
+      {
+        text: 'Continuer',
+        role: 'Continuer',
+      },
+    ],
+  });
+  await alert.present();
+  const { role, data } = await alert.onDidDismiss();
+  if(role=='Continuer'){
     
-  // }
+  }
+
 }
 
 

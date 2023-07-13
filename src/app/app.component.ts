@@ -2,9 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import * as dotenv from 'dotenv';
 import { AccueilPage } from './accueil/accueil.page';
-// dotenv.config();
 
 @Component({
   selector: 'app-root',

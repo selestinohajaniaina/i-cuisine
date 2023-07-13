@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ICategorie } from './categorie';
 import { AlertController, LoadingController } from '@ionic/angular';
-import { env } from 'src/environments/environment';
+import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx'
 
 @Component({
   selector: 'app-categorie',
@@ -11,7 +11,7 @@ import { env } from 'src/environments/environment';
 })
 export class CategoriePage implements OnInit {
 
-  private url = this.env.URL_SERVER;
+  private db:SQLiteObject;
 
   public err:string = '';
 
@@ -24,7 +24,33 @@ export class CategoriePage implements OnInit {
   cat_code: string='';
   libelleCa: string='';
 
-  constructor(private http: HttpClient, private alertController: AlertController, private loadingCtrl: LoadingController, private env: env) { 
+  constructor(private http: HttpClient, private alertController: AlertController, private loadingCtrl: LoadingController, private sqlite: SQLite) { 
+  }
+
+  creatDB() {
+    this.sqlite.create({
+      name: 'cuisine.db',
+      location: 'default'
+    }).then((res:SQLiteObject)=>{
+      this.db = res;
+      console.log('db created');
+    })
+    this.db.executeSql('CREATE TABLE IF NOT EXISTS categorie(`cat_id` INTEGER PRIMARY KEY AUTO_INCREMENT, `cat_code` VARCHAR(225), `libelleca` VARCHAR(225))', [])
+    .then(() => console.log('Table créée'))
+    .catch(e => console.log(e));
+  }
+
+  insert() {
+    this.db.executeSql('INSERT INTO `categorie` (`cat_id`, `cat_code`, `libelleCa`) VALUES (NULL, "cacao", "cacao")', [])
+    .then(() => console.log('donne enregistre'))
+    .catch(e => console.log(e));
+    this.select();
+  }
+
+  select() {
+    this.db.executeSql('SELECT * FROM categorie', [])
+    .then((data) => console.log('data fecth',data))
+    .catch(e => console.log(e));
   }
   
   //selection
@@ -34,78 +60,12 @@ export class CategoriePage implements OnInit {
       message:'Chargement ...',
     });
     loading.present();
-
-    this.http.get(`${this.url}/select/categorie/`)
-    .subscribe((resultData: any)=>
-    {
-      this.liste = resultData.result;
       loading.dismiss();
-      console.log(resultData.result);
-    });
   }
-
-  //ajout
-  addCategorie(bodyData:{}){
-    this.http.post(`${this.url}/insert/categorie`,bodyData).subscribe((resultData: any)=>
-    {
-        console.log(resultData,"categorie Successfully");
-    });
-    this.getCategorie();
-  }
-
-  //supression
-  btnSup(id: number){
-    this.presentAlert(id);
-  }
-  
-  async presentAlert(id:number) {
-    const alert = await this.alertController.create({
-      message: 'voullez-vous la suprimer?',
-      subHeader: 'Vous risquez de prerdre des données!',
-      buttons: [
-        {
-          text: 'Annuler',
-          role: 'Annuler',
-        },
-        {
-          text: 'Suprimer',
-          role: 'Suprimer',
-        },
-      ],
-    });
-    await alert.present();
-    const { role } = await alert.onDidDismiss();
-    if(role=='Suprimer'){
-      this.http.delete(`${this.url}/delete/categorie/`+ id).subscribe((resultData: any)=>
-      {
-          console.log(resultData,"Categorie Deleted");
-          this.getCategorie();
-      });
-      console.log(role);
-    }
-
-  }
-
-
 
    ngOnInit() {
     this.getCategorie();
-    
-  }
-
-  btnAjout(){
-    if(this.categorieName!=''&&this.categorieCode!=''){
-      let newValue = {
-        "cat_code" : this.categorieCode,
-        "libelleCa" : this.categorieName,
-      }
-
-      this.addCategorie(newValue);
-      this.categorieName='';
-      this.categorieCode='';
-    }else{
-      this.err="Champs vide non valide.";
-    }
+    this.creatDB();
   }
 
 }
