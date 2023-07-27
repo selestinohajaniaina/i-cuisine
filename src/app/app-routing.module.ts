@@ -46,7 +46,11 @@ const routes: Routes = [
   {
     path: 'parametre',
     loadChildren: () => import('./parametre/parametre.module').then( m => m.ParametrePageModule)
+  },  {
+    path: 'share',
+    loadChildren: () => import('./share/share.module').then( m => m.SharePageModule)
   },
+
 ];
 
 @NgModule({

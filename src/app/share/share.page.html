@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-back-button slot="start"></ion-back-button>
+    <ion-title>Recette partagé</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="data">
+  <ion-card  *ngFor="let newData of data">
+    <ion-img [src]="newData.recipe.image"></ion-img>
+    <ion-card-title>
+      {{ newData.recipe.label }}
+    </ion-card-title>
+    <ion-card-content>
+      kgdcuiguidgciu
+    </ion-card-content>
+  </ion-card>
+</ion-content>

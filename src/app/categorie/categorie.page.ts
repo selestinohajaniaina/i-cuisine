@@ -65,7 +65,9 @@ export class CategoriePage implements OnInit {
 
    ngOnInit() {
     this.getCategorie();
-    this.creatDB();
+    setTimeout(() => {
+      this.creatDB();
+    }, 1000);
   }
 
 }
