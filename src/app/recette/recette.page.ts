@@ -10,14 +10,16 @@ import { IRecette } from './recette';
 })
 export class RecettePage implements OnInit {
 
-  public liste:IRecette[]=[];
-
-  public nom_plat:string = '';
+  public nbr_person:number;
   public err:string = '';
 
   constructor(private http: HttpClient, private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
+  }
+
+  add() {
+
   }
 
 }

@@ -12,27 +12,19 @@ import { IProduit } from './produit';
 export class ProduitPage implements OnInit {
 
   public err:string = '';
-  public libellePro:string = '';
-  public unite:string = '';
-  public codeCa:string = '';
+  public pro_code:string = '';
+  public pro_libelle:string = '';
+  public cat_code:string = '';
+  public pro_unite:string = '';
 
   constructor(private http: HttpClient, private alertController: AlertController, private loadingCtrl: LoadingController) { }
 
   public liste: IProduit[]=[];
   public listeCat: ICategorie[]=[];
 
-  btnAjout(){
-    if(this.libellePro!=''&&this.unite!=''&&this.codeCa!=''){
-      let newValue = {
-        "libellePro" : this.libellePro,
-        "codeCa" : this.codeCa,
-        "unite" : this.unite,
-      }
-
-      console.log(newValue);
-      this.libellePro='';
-      this.codeCa='';
-      this.unite='';
+  add(){
+    if(this.pro_libelle!=''&&this.pro_code!=''&&this.cat_code!=''&&this.pro_unite!=''){
+      
     }else{
       this.err="Champs vide non valide.";
     }

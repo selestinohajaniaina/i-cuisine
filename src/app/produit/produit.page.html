@@ -1,14 +1,36 @@
-<ion-header id="header">
-
-  <div class="back">
-    <ion-back-button id="back"></ion-back-button>
-  </div>
-
-    <div id="title">
-      <ion-title >Produit</ion-title>
-    </div>
-
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-back-button slot="start"></ion-back-button>
+    <ion-title >Produit</ion-title>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+<ion-card>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-input type="text" [(ngModel)]="pro_code" placeholder="code"></ion-input>
+          </ion-col>
+          <ion-col>
+            <ion-select value="Gramme">
+              <ion-select-option value="Gramme">Gramme(s)</ion-select-option>
+              <ion-select-option value="Littre">Littre(s)</ion-select-option>
+              <ion-select-option value="Piece">Piece(s)</ion-select-option>
+              <ion-select-option value="Cuillere">Cuillere(s)</ion-select-option>
+            </ion-select>
+          </ion-col>
+          <ion-col>
+            <ion-input type="text" [(ngModel)]="pro_libelle" placeholder="Libelle"></ion-input>
+          </ion-col>
+          <ion-col>
+            <ion-button (click)="add()">
+              <ion-icon name="add-outline" slot="start"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+</ion-card>
+
 </ion-content>

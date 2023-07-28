@@ -40,8 +40,8 @@ export class CategoriePage implements OnInit {
     .catch(e => console.log(e));
   }
 
-  insert() {
-    this.db.executeSql('INSERT INTO `categorie` (`cat_id`, `cat_code`, `libelleCa`) VALUES (NULL, "cacao", "cacao")', [])
+  insert(code: string, name:string) {
+    this.db.executeSql('INSERT INTO `categorie` (`cat_code`, `libelleCa`) VALUES ("'+code+'", "'+name+'")', [])
     .then(() => console.log('donne enregistre'))
     .catch(e => console.log(e));
     this.select();
@@ -68,6 +68,14 @@ export class CategoriePage implements OnInit {
     setTimeout(() => {
       this.creatDB();
     }, 1000);
+  }
+
+  add() {
+    if(this.categorieCode!=''&& this.categorieName!=''){
+      this.insert(this.categorieCode, this.categorieName);
+    }else{
+      this.err ='Completer tous les champs!';
+    }
   }
 
 }
