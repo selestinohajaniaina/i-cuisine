@@ -1,14 +1,69 @@
-<ion-header id="header">
-
-  <div class="back">
-    <ion-back-button id="back"></ion-back-button>
-  </div>
-
-    <div id="title">
-      <ion-title >{{ nom_recette }}</ion-title>
-    </div>
-
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-back-button slot="start"></ion-back-button>
+    <ion-title >{{ nom_recette }}</ion-title>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <ion-card>
+    <ion-grid>
+      <ion-row>
+        
+        <ion-col size="4">
+          <ion-select [(ngModel)]="pro_id">
+            <ion-select-option *ngFor="let rec_pro of dataPro" [value]="rec_pro.id">{{ rec_pro.name }}</ion-select-option>
+          </ion-select>
+        </ion-col>
+        
+        <ion-col size="4">
+          <ion-input type="text" [(ngModel)]="varProduit" placeholder="variete"></ion-input>
+        </ion-col>
+
+        <ion-col size="2">
+          <ion-input type="number" [(ngModel)]="qteProduit" placeholder="quantite"></ion-input>
+        </ion-col>
+
+        <ion-col size="2">
+          <ion-button (click)="addPro()">
+            <ion-icon name="add-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+    <ion-label *ngIf="err" color="danger">{{ err }}</ion-label>
+  </ion-card>
+
+
+  <!-- tableau  -->
+  <ion-list>
+
+    <ion-item color="primary">
+      <ion-grid  class="ion-border">
+        <ion-row>
+          <ion-col size="5">Produit</ion-col>
+          <ion-col size="5">Variete</ion-col>
+          <ion-col size="2">Qte</ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+    <ion-item *ngFor="let all_rec_pro of dataPro">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="2" class="ion-border">{{ select_produit_id(all_rec_pro.pro_id).name }}</ion-col>
+          <ion-col size="2" class="ion-border">{{ all_rec_pro.variete }}</ion-col>
+          <ion-col size="2" class="ion-border">{{ all_rec_pro.qte }} {{ select_produit_id(all_rec_pro.pro_id).unite }}</ion-col>
+          <ion-col size="1" class="ion-border" (click)="showAlert(all_rec_pro.qte.id)">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+    
+  </ion-list>
+
 </ion-content>

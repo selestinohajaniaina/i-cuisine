@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { ICategorie } from './categorie';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx'
+import { DatabaseService } from '../database.service';
 
 @Component({
   selector: 'app-categorie',
@@ -11,71 +10,64 @@ import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx'
 })
 export class CategoriePage implements OnInit {
 
-  private db:SQLiteObject;
-
   public err:string = '';
-
-  public liste:ICategorie[]=[];
-
+  public dataCat: any;
   public categorieName:string = '';
-
   public categorieCode:string = '';
 
-  cat_code: string='';
-  libelleCa: string='';
-
-  constructor(private http: HttpClient, private alertController: AlertController, private loadingCtrl: LoadingController, private sqlite: SQLite) { 
-  }
-
-  creatDB() {
-    this.sqlite.create({
-      name: 'cuisine.db',
-      location: 'default'
-    }).then((res:SQLiteObject)=>{
-      this.db = res;
-      console.log('db created');
+  constructor( private alertController: AlertController, private loadingCtrl: LoadingController, private database: DatabaseService) { 
+    this.database.createDatabase().then(()=>{
+      this.getAll();
+      this.getAll();
     })
-    this.db.executeSql('CREATE TABLE IF NOT EXISTS categorie(`cat_id` INTEGER PRIMARY KEY AUTO_INCREMENT, `cat_code` VARCHAR(225), `libelleca` VARCHAR(225))', [])
-    .then(() => console.log('Table créée'))
-    .catch(e => console.log(e));
   }
 
-  insert(code: string, name:string) {
-    this.db.executeSql('INSERT INTO `categorie` (`cat_code`, `libelleCa`) VALUES ("'+code+'", "'+name+'")', [])
-    .then(() => console.log('donne enregistre'))
-    .catch(e => console.log(e));
-    this.select();
-  }
-
-  select() {
-    this.db.executeSql('SELECT * FROM categorie', [])
-    .then((data) => console.log('data fecth',data))
-    .catch(e => console.log(e));
-  }
-  
-  //selection
-  async getCategorie(){
-
-    const loading = await this.loadingCtrl.create({
-      message:'Chargement ...',
+  getAll() {
+    this.database.selectAllTable('categorie').then((data)=>{
+      this.dataCat = data;
     });
-    loading.present();
-      loading.dismiss();
+    console.log('@getAll ito: ',this.dataCat);
   }
 
-   ngOnInit() {
-    this.getCategorie();
-    setTimeout(() => {
-      this.creatDB();
-    }, 1000);
-  }
-
-  add() {
-    if(this.categorieCode!=''&& this.categorieName!=''){
-      this.insert(this.categorieCode, this.categorieName);
+  addOne() {
+    if(this.categorieCode.length && this.categorieName.length) {
+      this.database.add_cat(this.categorieCode, this.categorieName).then(()=>{
+        this.getAll();
+        this.getAll();
+        this.err='';
+      });
+      this.categorieCode ='';
+      this.categorieName ='';
     }else{
-      this.err ='Completer tous les champs!';
+      this.err = "champ vide non valide!";
     }
+  }
+
+  delCat(id: number) {
+    this.database.deleteFromTable('categorie', id).then(()=>{
+      this.getAll();
+        this.getAll();
+        this.err='';
+    });
+  }
+
+  async showAlert(id: number) {
+    const alert = await this.alertController.create({
+      message: 'Voullez-vous vraiment la suprimer?',
+      buttons: [
+        {text:'Annuler', role:'Annuler'},
+        {text:'Suprimer', role:'Suprimer'},
+      ]
+    });
+    await alert.present();
+    const { role } = await alert.onDidDismiss();
+    if(role=='Suprimer'){
+      this.delCat(id);
+    }
+  }
+
+  ngOnInit(): void {
+    
   }
 
 }

@@ -3,6 +3,10 @@
     <ion-back-button slot="start"></ion-back-button>
     <ion-title>Recette partagé</ion-title>
   </ion-toolbar>
+  <ion-toolbar color="danger">
+    <ion-searchbar color="danger" [(ngModel)]="searchQuery" (ionChange)="barSearch()"></ion-searchbar>
+</ion-toolbar>
+  <ion-progress-bar type="indeterminate" *ngIf="loaded"></ion-progress-bar>
 </ion-header>
 
 <ion-content *ngIf="data">
@@ -12,7 +16,13 @@
       {{ newData.recipe.label }}
     </ion-card-title>
     <ion-card-content>
-      kgdcuiguidgciu
+      <ion-card-subtitle>
+        {{ newData.recipe.mealType }}
+      </ion-card-subtitle>
     </ion-card-content>
+    {{ newData.recipe.shareAs }}
+    <ion-button color="primary" shape="round" fill="outline" color="light" (click)="open(newData.recipe.shareAs)">
+      <ion-icon name="open-outline" color="primary"></ion-icon>
+    </ion-button>
   </ion-card>
 </ion-content>

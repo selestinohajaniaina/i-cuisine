@@ -7,30 +7,73 @@
 
 <ion-content>
 
-<ion-card>
+  <ion-card>
+    <ion-grid>
+      <ion-row>
+
+        <ion-col size="2">
+          <ion-input type="text" [(ngModel)]="pro_code" placeholder="code"></ion-input>
+        </ion-col>
+
+        <ion-col size="2">
+          <ion-select [(ngModel)]="cat_code">
+            <ion-select-option *ngFor="let codeCat of listCat">{{ codeCat.cat_code }}</ion-select-option>
+          </ion-select>
+        </ion-col>
+
+        <ion-col size="4">
+          <ion-input type="text" [(ngModel)]="pro_libelle" placeholder="Libelle"></ion-input>
+        </ion-col>
+
+        <ion-col size="2">
+          <ion-select value="g" [(ngModel)]="pro_unite">
+            <ion-select-option value="g">Gramme(s)</ion-select-option>
+            <ion-select-option value="L">Littre(s)</ion-select-option>
+            <ion-select-option value="p">Piece(s)</ion-select-option>
+            <ion-select-option value="c">Cuillere(s)</ion-select-option>
+          </ion-select>
+        </ion-col>
+
+        <ion-col size="2">
+          <ion-button (click)="add()">
+            <ion-icon name="add-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+    <ion-label *ngIf="err" color="danger">{{ err }}</ion-label>
+  </ion-card>
+
+  <!-- tableau  -->
+  <ion-list>
+
+    <ion-item color="primary">
+      <ion-grid  class="ion-border">
+        <ion-row>
+          <ion-col size="2">Code Pro</ion-col>
+          <ion-col size="2">Code Cat</ion-col>
+          <ion-col size="2">Unité</ion-col>
+          <ion-col size="6">Libelle</ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+    <ion-item *ngFor="let allPro of listPro">
       <ion-grid>
         <ion-row>
-          <ion-col>
-            <ion-input type="text" [(ngModel)]="pro_code" placeholder="code"></ion-input>
-          </ion-col>
-          <ion-col>
-            <ion-select value="Gramme">
-              <ion-select-option value="Gramme">Gramme(s)</ion-select-option>
-              <ion-select-option value="Littre">Littre(s)</ion-select-option>
-              <ion-select-option value="Piece">Piece(s)</ion-select-option>
-              <ion-select-option value="Cuillere">Cuillere(s)</ion-select-option>
-            </ion-select>
-          </ion-col>
-          <ion-col>
-            <ion-input type="text" [(ngModel)]="pro_libelle" placeholder="Libelle"></ion-input>
-          </ion-col>
-          <ion-col>
-            <ion-button (click)="add()">
-              <ion-icon name="add-outline" slot="start"></ion-icon>
-            </ion-button>
+          <ion-col size="2" class="ion-border">{{ allPro.pro_code }}</ion-col>
+          <ion-col size="2" class="ion-border">{{ allPro.cat_code }}</ion-col>
+          <ion-col size="2" class="ion-border">{{ allPro.unite }}</ion-col>
+          <ion-col size="5" class="ion-border">{{ allPro.name }}</ion-col>
+          <ion-col size="1" class="ion-border" (click)="showAlert(allPro.id)">
+            <ion-icon name="trash-outline"></ion-icon>
           </ion-col>
         </ion-row>
       </ion-grid>
-</ion-card>
+    </ion-item>
 
+    
+  </ion-list>
+  
 </ion-content>

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 
 @Component({
@@ -10,16 +10,17 @@ import { LoadingController } from '@ionic/angular';
 })
 export class PersonnePage implements OnInit {
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private loadingCtrl: LoadingController) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient, private loadingCtrl: LoadingController, private router: Router) { }
 
   public nbr_person:number;
+  public rec_id:number;
 
   ngOnInit() {
-    // this.id_recette = this.route.snapshot.params['id_plat'];
+    this.rec_id = this.route.snapshot.params['id_plat'];
   }
 
   add() {
-    
+    this.router.navigate(['../detail', this.rec_id], { queryParams: { person: this.nbr_person } });
   }
 
 
