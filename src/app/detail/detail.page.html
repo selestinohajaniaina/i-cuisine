@@ -12,8 +12,8 @@
       <ion-row>
         
         <ion-col size="4">
-          <ion-select [(ngModel)]="pro_id">
-            <ion-select-option *ngFor="let rec_pro of dataPro" [value]="rec_pro.id">{{ rec_pro.name }}</ion-select-option>
+          <ion-select [(ngModel)]="pro_name">
+            <ion-select-option *ngFor="let rec_pro of dataSelectPro">{{ rec_pro.name }}</ion-select-option>
           </ion-select>
         </ion-col>
         
@@ -43,9 +43,9 @@
     <ion-item color="primary">
       <ion-grid  class="ion-border">
         <ion-row>
-          <ion-col size="5">Produit</ion-col>
+          <ion-col size="4">Produit</ion-col>
           <ion-col size="5">Variete</ion-col>
-          <ion-col size="2">Qte</ion-col>
+          <ion-col size="3">Qte</ion-col>
         </ion-row>
       </ion-grid>
     </ion-item>
@@ -53,10 +53,10 @@
     <ion-item *ngFor="let all_rec_pro of dataPro">
       <ion-grid>
         <ion-row>
-          <ion-col size="2" class="ion-border">{{ select_produit_id(all_rec_pro.pro_id).name }}</ion-col>
-          <ion-col size="2" class="ion-border">{{ all_rec_pro.variete }}</ion-col>
-          <ion-col size="2" class="ion-border">{{ all_rec_pro.qte }} {{ select_produit_id(all_rec_pro.pro_id).unite }}</ion-col>
-          <ion-col size="1" class="ion-border" (click)="showAlert(all_rec_pro.qte.id)">
+          <ion-col size="4" class="ion-border">{{ all_rec_pro.name }}</ion-col>
+          <ion-col size="5" class="ion-border">{{ all_rec_pro.variete }}</ion-col>
+          <ion-col size="3" class="ion-border">{{ all_rec_pro.qte }}</ion-col>
+          <ion-col size="1" class="ion-border" (click)="showAlert(all_rec_pro.id)">
             <ion-icon name="trash-outline"></ion-icon>
           </ion-col>
         </ion-row>

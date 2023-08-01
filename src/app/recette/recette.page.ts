@@ -11,7 +11,6 @@ import { DatabaseService } from '../database.service';
 })
 export class RecettePage implements OnInit {
 
-  public nbr_person:number;
   public recetes:any;
   public recName:string = '';
   public err:string = '';

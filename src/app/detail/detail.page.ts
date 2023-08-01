@@ -11,7 +11,6 @@ import { DatabaseService } from '../database.service';
 })
 export class DetailPage implements OnInit {
 
-  public nbrPerson:number = 0;
   public qteProduit:number = 0;
   public id_recette:number;
   public varProduit:string = '';
@@ -21,12 +20,15 @@ export class DetailPage implements OnInit {
   public pro_id:number;
   public dataRec: any;
   public dataPro: any;
+  public dataSelectPro: any;
   public dataOnePro: any;
 
   constructor(private database:DatabaseService ,private route: ActivatedRoute, private http: HttpClient, private alertController: AlertController, private loadingCtrl: LoadingController) { 
     this.database.createDatabase().then(()=>{
-      this.getRec();
-      this.getRec();
+      this.getSelectPro();
+      this.getSelectPro();
+      this.getRec(this.route.snapshot.params['id_recette']);
+      this.getRec(this.route.snapshot.params['id_recette']);
       this.getAllPro();
       this.getAllPro();
     })
@@ -35,22 +37,24 @@ export class DetailPage implements OnInit {
   ngOnInit() {
 
     this.id_recette = this.route.snapshot.params['id_recette'];
-    this.getRec();
-    this.getRec();
-    this.getAllPro();
-    this.getAllPro();
-    this.route.queryParams.subscribe(params => {
-      this.nbrPerson = params['person'];
-    });
-    console.log(this.nbrPerson + " r= " + this.id_recette);
+    console.log("id_recette",this.id_recette);
+    
   }
 
-  getRec() {
-    this.database.selectWithParam('plat','id',this.id_recette).then((data)=>{
+  getRec(id:number) {
+    this.database.selectWithParam('plat','id',id).then((data)=>{
       this.dataRec = data;
-      this.nom_recette = this.dataRec.name;
+      this.nom_recette = this.dataRec[0].name;
+      console.log('@getRec ito(data): ',data);
     });
-    console.log('@getRec ito: ',this.dataRec);
+    console.log('@getRec ito: ',this.dataRec[0],this.nom_recette);
+  }
+
+  getSelectPro() {
+    this.database.selectAllTable('produit').then((data)=>{
+      this.dataSelectPro = data;
+    });
+    console.log('@getAllPro ito: ',this.dataSelectPro);
   }
 
   getAllPro() {
@@ -61,10 +65,8 @@ export class DetailPage implements OnInit {
   }
 
   addPro() {
-    if(this.pro_id&&this.qteProduit){
-      this.database.add_pro_rec(this.id_recette, this.pro_id, this.varProduit, this.qteProduit).then(()=>{
-        this.err='';
-        this.pro_id=0;
+    if(this.pro_name&&this.qteProduit){
+      this.database.add_pro_rec(this.id_recette, this.pro_name, this.varProduit, this.qteProduit).then(()=>{
         this.pro_name='';
         this.varProduit='';
         this.qteProduit=0;
@@ -78,12 +80,12 @@ export class DetailPage implements OnInit {
     
   }
 
-  select_produit_id(id:number):any {
-    this.database.selectWithParam('produit','id',id).then((data)=>{
-      this.dataOnePro = data;
-      return this.dataOnePro;
-    });
-  }
+  // select_produit_id(id:number):any {
+  //   this.database.selectWithParam('produit','id',id).then((data)=>{
+  //     this.dataOnePro = data;
+  //     return this.dataOnePro;
+  //   });
+  // }
 
   delCat(id: number) {
     this.database.deleteFromTable('detailPlat', id).then(()=>{

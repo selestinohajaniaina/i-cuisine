@@ -56,7 +56,7 @@ export class DatabaseService {
     `,[]);
 
     await this.databaseObj.executeSql(`
-    CREATE TABLE IF NOT EXISTS ${this.tables.detailPlat} ( id INTEGER PRIMARY KEY AUTOINCREMENT, pla_id INT NOT NULL , pro_id INT NOT NULL , variete VARCHAR(255) , qte VARCHAR(255) NOT NULL)
+    CREATE TABLE IF NOT EXISTS ${this.tables.detailPlat} ( id INTEGER PRIMARY KEY AUTOINCREMENT, pla_id INT NOT NULL , name VARCHAR(255) NOT NULL , variete VARCHAR(255) , qte VARCHAR(255) NOT NULL)
     `,[]);
 
     await this.databaseObj.executeSql(`
@@ -104,9 +104,9 @@ export class DatabaseService {
     })
   }
 
-  async add_pro_rec(id_plat:number, pro_id:number, variete:string|'', Qte:number|string) {
+  async add_pro_rec(id_plat:number, pro_name:string, variete:string|'', Qte:number|string) {
     await this.databaseObj.executeSql(`
-    INSERT INTO ${this.tables.detailPlat} (id_plat, pro_id, variete, name, qte) VALUES ('${id_plat}', '${pro_id}', '${variete}', '${name}', '${Qte}')
+    INSERT INTO ${this.tables.detailPlat} (pla_id, name, variete, qte) VALUES ('${id_plat}', '${pro_name}', '${variete}', '${Qte}')
     `,[])
     .then(()=> {return "plat inserted"})
     .catch((e) => {
@@ -132,7 +132,7 @@ export class DatabaseService {
     })
   }
 
-  async selectWithParam(table: string,param:string , valeur:string|number) {
+  async selectWithParam(table: string, param:string, valeur:string|number) {
     return this.databaseObj.executeSql(`
     SELECT * FROM ${table} WHERE ${param}=${valeur} ORDER BY name ASC
     `,[])
@@ -143,7 +143,7 @@ export class DatabaseService {
           data.push(res.rows.item(i));
         }
       }
-      return data
+      return data;
     })
     .catch((e) => {
       return`error on getting data from ${table}: ${JSON.stringify(e)}`
