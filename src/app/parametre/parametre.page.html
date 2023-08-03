@@ -8,24 +8,28 @@
 <ion-content>
 
     <ion-list>
-      <ion-item>
-        Mode sombre
-        <ion-toggle [checked]="false" slot="end">
+      <ion-item (click)="mode()">
+        Mode &nbsp;
+        <ion-text *ngIf="!chec"> sombre</ion-text>
+        <ion-text *ngIf="chec"> claire</ion-text>
+        <ion-icon name="sunny-outline" slot="end" *ngIf="!chec"></ion-icon>
+        <ion-icon name="moon-outline" slot="end" *ngIf="chec"></ion-icon>
+        <ion-toggle [checked]="chec" slot="end">
         </ion-toggle>
       </ion-item>
       <ion-item>
         Langue
-        <ion-select label="label" slot="end" value="Francais">
-          <ion-select-option value="Allemand">❤ &nbsp; Allemand</ion-select-option>
-          <ion-select-option value="Anglais">❤ &nbsp; Anglais</ion-select-option>
-          <ion-select-option value="Espagne">❤ &nbsp; Espagne</ion-select-option>
-          <ion-select-option value="Francais">❤ &nbsp; Francais</ion-select-option>
-          <ion-select-option value="Italien">❤ &nbsp; Italien</ion-select-option>
-          <ion-select-option value="Malagasy">❤ &nbsp; Malagasy</ion-select-option>
+        <ion-select label="label" slot="end" value="Francais" (click)="presentAlert()">
+          <ion-select-option value="Allemand">🇩🇪 &nbsp; Allemand</ion-select-option>
+          <ion-select-option value="Anglais">🇬🇧 &nbsp; Anglais</ion-select-option>
+          <ion-select-option value="Malagasy">🇨🇳 &nbsp; Chinnois</ion-select-option>
+          <ion-select-option value="Espagne">🇩🇪 &nbsp; Espagne</ion-select-option>
+          <ion-select-option value="Francais">🇫🇷 &nbsp; Francais</ion-select-option>
+          <ion-select-option value="Italien">🇯🇵 &nbsp; Japonnais</ion-select-option>
+          <ion-select-option value="Malagasy">🇲🇬 &nbsp; Malagasy</ion-select-option>
+          <ion-select-option value="Malagasy">🇮🇹 &nbsp; Italien</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-button expand="block">Modifier</ion-button>
-      <ion-button routerLink="../accueil" expand="block" color="medium">Annuler</ion-button>
     </ion-list>
   
   

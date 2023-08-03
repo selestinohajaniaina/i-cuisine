@@ -1,4 +1,39 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+
+  <ion-menu menuId="main-menu" content-id="main">
+    <ion-header>
+      <ion-toolbar color="danger">
+        <ion-title>Menu</ion-title>
+        <ion-img src="assets/icon.png" slot="start"></ion-img>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item routerLink="../parametre">
+          <ion-label>Parametre</ion-label>
+          <ion-icon name="settings-outline" slot="start"></ion-icon>
+        </ion-item>
+        <ion-item (click)="sendEmail()">
+          <ion-label>Signaler un bug</ion-label>
+          <ion-icon name="bug-outline" slot="start"></ion-icon>
+        </ion-item>
+        <!-- <ion-item>
+          <ion-label>Partager</ion-label>
+          <ion-icon name="share-social-outline" slot="start"></ion-icon>
+        </ion-item> -->
+        <ion-item routerLink="../apropos">
+          <ion-label>Lisez-moi</ion-label>
+          <ion-icon name="book-outline" slot="start"></ion-icon>
+        </ion-item>
+        <ion-item routerLink="../lise">
+          <ion-label>Apropos</ion-label>
+          <ion-icon name="information-circle-outline" slot="start"></ion-icon>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+
+  <ion-router-outlet id="main"></ion-router-outlet>
 </ion-app>
  

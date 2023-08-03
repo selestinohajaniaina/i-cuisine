@@ -16,16 +16,20 @@ export class ParametrePage implements OnInit {
   public error: string = '';
   public data:{}={};
   public id_user: number = 0;
+  public chec: boolean = localStorage.getItem('color-theme')=='dark'? true: false;
 
   constructor(private http: HttpClient, private loadingCtrl: LoadingController, private router: Router, private alertController: AlertController) { }
 
   ngOnInit() {
     this.password = localStorage.getItem('password');
+    document.body.setAttribute('color-theme', this.chec ? 'dark' : 'light' );
+
   }
 
-  checked(){
-    this.showPassword =! this.showPassword;
-    this.type = this.showPassword ? 'password': 'text';
+  mode(){
+    this.chec = !this.chec;
+    document.body.setAttribute('color-theme', this.chec ? 'dark' : 'light' );
+    localStorage.setItem('color-theme',this.chec ? 'dark' : 'light' )
   }
 
   async getInfo(){
@@ -40,24 +44,15 @@ export class ParametrePage implements OnInit {
 
 async presentAlert() {
   const alert = await this.alertController.create({
-    message: "Vous risquez de suprimer deffinitivement le mots de verouillage, et l'application sera mettre en mode initial. Nous garderons vos donnés personnel, voulez-vous vraiment continuer ?",
+    message: "Le changement du langue n'est pas encore disponnible!",
     buttons: [
       {
-        text: 'Annuler',
-        role: 'annuler',
-      },
-      {
-        text: 'Continuer',
-        role: 'Continuer',
+        text: 'Ok',
+        role: 'ok',
       },
     ],
   });
   await alert.present();
-  const { role, data } = await alert.onDidDismiss();
-  if(role=='Continuer'){
-    
-  }
-
 }
 
 

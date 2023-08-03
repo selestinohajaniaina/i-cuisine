@@ -14,7 +14,8 @@
       C'est un application pour faciliter notre vie,
       enregistrer votre merveilleux recette pour le trouver
       facilement a la prochaine cuisson.
-      <ion-button expand="block" (click)="begin()">Demarer</ion-button>
+      <ion-button expand="block" *ngIf="!connect" (click)="begin()">Demarer</ion-button>
+      <ion-button expand="block" *ngIf="connect" (click)="pass()">Demarer</ion-button>
     </ion-card-content>
   </ion-card>
 </ion-content>

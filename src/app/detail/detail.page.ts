@@ -16,21 +16,25 @@ export class DetailPage implements OnInit {
   public varProduit:string = '';
   public nom_recette:string = '';
   public err:string = '';
+  public errdesc:string = '';
   public pro_name:string = '';
   public pro_id:number;
   public dataRec: any;
   public dataPro: any;
   public dataSelectPro: any;
   public dataOnePro: any;
+  public description: string;
+  public descData: any;
 
   constructor(private database:DatabaseService ,private route: ActivatedRoute, private http: HttpClient, private alertController: AlertController, private loadingCtrl: LoadingController) { 
     this.database.createDatabase().then(()=>{
       this.getSelectPro();
       this.getSelectPro();
-      this.getRec(this.route.snapshot.params['id_recette']);
-      this.getRec(this.route.snapshot.params['id_recette']);
       this.getAllPro();
       this.getAllPro();
+      this.getDesc(this.route.snapshot.params['id_recette']);
+      this.getRec(this.route.snapshot.params['id_recette']);
+      this.getRec(this.route.snapshot.params['id_recette']);
     })
   }
 
@@ -80,12 +84,36 @@ export class DetailPage implements OnInit {
     
   }
 
-  // select_produit_id(id:number):any {
-  //   this.database.selectWithParam('produit','id',id).then((data)=>{
-  //     this.dataOnePro = data;
-  //     return this.dataOnePro;
-  //   });
-  // }
+  addDesc() {
+    if(this.description){
+      this.delDesc(this.id_recette);
+      this.database.add_desc(this.id_recette, this.description).then(()=>{
+        this.errdesc='';
+      });
+
+    }else{
+      this.errdesc='Champs vide non valide!';
+    }
+    
+  }
+
+  getDesc(id:number):any {
+    this.database.selectWithParam('description','id',id).then((data)=>{
+      this.descData = data;
+      console.log('@getDesc ito: ',this.descData);
+      console.log('@getDesc ito[0]: ',this.descData[0]);
+      this.description = this.descData[0].name;
+      
+    });
+  }
+
+  delDesc(id: number) {
+    this.database.deleteFromTable('description', id).then(()=>{
+        this.getAllPro();
+        this.getAllPro();
+        this.errdesc='';
+    });
+  }
 
   delCat(id: number) {
     this.database.deleteFromTable('detailPlat', id).then(()=>{

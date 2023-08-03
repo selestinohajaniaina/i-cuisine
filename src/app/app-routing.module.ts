@@ -32,10 +32,6 @@ const routes: Routes = [
     loadChildren: () => import('./detail/detail.module').then( m => m.DetailPageModule)
   },
   {
-    path: 'resultat',
-    loadChildren: () => import('./resultat/resultat.module').then( m => m.ResultatPageModule)
-  },
-  {
     path: 'apropos',
     loadChildren: () => import('./apropos/apropos.module').then( m => m.AproposPageModule)
   },
@@ -46,7 +42,11 @@ const routes: Routes = [
   {
     path: 'share',
     loadChildren: () => import('./share/share.module').then( m => m.SharePageModule)
+  },  {
+    path: 'lise',
+    loadChildren: () => import('./lise/lise.module').then( m => m.LisePageModule)
   },
+
 
 ];
 

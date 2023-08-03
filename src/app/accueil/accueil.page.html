@@ -1,40 +1,9 @@
-<ion-menu menuId="menu-main" contentId="main">
-  <ion-header>
-    <ion-toolbar color="danger">
-      <ion-title>Menu</ion-title>
-      <ion-img src="assets/icon.png" slot="start"></ion-img>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content>
-    <ion-list>
-      <ion-item routerLink="../parametre">
-        <ion-label>Parametre</ion-label>
-        <ion-icon name="settings-outline" slot="start"></ion-icon>
-      </ion-item>
-      <ion-item>
-        <ion-label>Signaler un bug</ion-label>
-        <ion-icon name="bug-outline" slot="start" (click)="sendEmail()"></ion-icon>
-      </ion-item>
-      <ion-item>
-        <ion-label>Partager</ion-label>
-        <ion-icon name="share-social-outline" slot="start" (click)="sendEmail()"></ion-icon>
-      </ion-item>
-      <ion-item routerLink="">
-        <ion-label>Lisez-moi</ion-label>
-        <ion-icon name="book-outline" slot="start"></ion-icon>
-      </ion-item>
-      <ion-item routerLink="../apropos">
-        <ion-label>Apropos</ion-label>
-        <ion-icon name="information-circle-outline" slot="start"></ion-icon>
-      </ion-item>
-    </ion-list>
-  </ion-content>
-</ion-menu>
 
-<ion-header id="main">
+
+<ion-header>
   <ion-toolbar color="danger">
     <ion-buttons slot="start">
-      <ion-menu-button id="menu-main"></ion-menu-button>
+      <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
     <ion-title >Accueil</ion-title>
   </ion-toolbar>
@@ -63,18 +32,9 @@
 <ion-card routerLink="../recette">
   <ion-img src="assets/pla.jpg"></ion-img>
   <ion-card-content>
-    <ion-card-title>Recette</ion-card-title>
+    <ion-card-title>Recette personnel</ion-card-title>
     Montrez a nous votre talent de cuisine en construsant ici
     votre propre recette.🤗
-  </ion-card-content>
-</ion-card>
-
-<ion-card routerLink="../resultat">
-  <ion-img src="assets/res.jpg"></ion-img>
-  <ion-card-content>
-    <ion-card-title>Notes</ion-card-title>
-    N'oublie pas de donner une notes (⭐) a la recette pour defier
-    votre camarade, montre-lui votre talent.🥰
   </ion-card-content>
 </ion-card>
 
@@ -87,5 +47,4 @@
     de gagner d'argent quand les gens s'interressent.🤑
   </ion-card-content>
 </ion-card>
-
 </ion-content>

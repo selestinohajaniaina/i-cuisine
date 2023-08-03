@@ -83,11 +83,11 @@ export class AccueilPage implements OnInit {
   }
 
 //send message for a bug
-sendEmail(){
-  this.emailComposer.open({
-    to:'seha.karoka@gmail.com'
-  })
-}
+// sendEmail(){
+//   this.emailComposer.open({
+//     to:'seha.karoka@gmail.com'
+//   })
+// }
 
 
 

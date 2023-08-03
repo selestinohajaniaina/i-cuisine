@@ -9,6 +9,10 @@
   <ion-progress-bar type="indeterminate" *ngIf="loaded"></ion-progress-bar>
 </ion-header>
 
+<ion-content *ngIf="!data">
+  N'oublie pas de se connecter a l'internet pour continuer! 
+</ion-content>
+
 <ion-content *ngIf="data">
   <ion-card  *ngFor="let newData of data">
     <ion-img [src]="newData.recipe.image"></ion-img>

@@ -48,11 +48,7 @@ export class DatabaseService {
     `,[]);
 
     await this.databaseObj.executeSql(`
-    CREATE TABLE IF NOT EXISTS ${this.tables.avis} ( id INTEGER PRIMARY KEY AUTOINCREMENT, pla_id INT NOT NULL , temps VARCHAR(255) NOT NULL , dificulte VARCHAR(255) NOT NULL , etoile VARCHAR(255) NOT NULL , name VARCHAR(255) NOT NULL)
-    `,[]);
-
-    await this.databaseObj.executeSql(`
-    CREATE TABLE IF NOT EXISTS ${this.tables.description} ( id INTEGER PRIMARY KEY AUTOINCREMENT, pla_id INT NOT NULL , description VARCHAR(255) NOT NULL)
+    CREATE TABLE IF NOT EXISTS ${this.tables.description} ( id INTEGER NOT NULL , name VARCHAR(3000) NOT NULL)
     `,[]);
 
     await this.databaseObj.executeSql(`
@@ -63,6 +59,34 @@ export class DatabaseService {
     CREATE TABLE IF NOT EXISTS ${this.tables.plat} ( id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(255) NOT NULL)
     `,[]);
 
+  }
+
+  async dataDefault() {
+    
+    // insert data
+    await this.databaseObj.executeSql(`
+    INSERT INTO ${this.tables.categorie} ( cat_code , name ) VALUES ( 'EP' , 'EPICE' )
+    `,[]);
+    
+    // insert data
+    await this.databaseObj.executeSql(`
+    INSERT INTO ${this.tables.produit} ( pro_code , cat_code , name , unite ) VALUES ( 'SE' , 'EP' , 'sel' , 'c' )
+    `,[]);
+
+    // insert data
+    await this.databaseObj.executeSql(`
+    INSERT INTO ${this.tables.produit} ( pro_code , cat_code , name , unite ) VALUES ( 'PO' , 'EP' , 'poivre' , 'c' )
+    `,[]);
+    
+    // insert data
+    await this.databaseObj.executeSql(`
+    INSERT INTO ${this.tables.detailPlat} ( pla_id , name , variete , qte ) VALUES ( 1 , 'salade' , '' , 0.5 )
+    `,[]);
+
+    // insert data
+    await this.databaseObj.executeSql(`
+    INSERT INTO ${this.tables.plat} ( name ) VALUES ( 'salade vinaigrette' )
+    `,[]);
   }
 
   async showAlert(msg: any) {
@@ -101,6 +125,16 @@ export class DatabaseService {
     .then(()=> {return "plat inserted"})
     .catch((e) => {
       return e.code == 6 ? "plat already exist" : `plat error: ${JSON.stringify(e)}`
+    })
+  }
+
+  async add_desc(id: number, texte: string) {
+    await this.databaseObj.executeSql(`
+    INSERT INTO ${this.tables.description} (id, name) VALUES (${id} , '${texte}')
+    `,[])
+    .then(()=> {return "texte description inserted"})
+    .catch((e) => {
+      return e.code == 6 ? "texte description already exist" : `texte description error: ${JSON.stringify(e)}`
     })
   }
 
